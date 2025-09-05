@@ -1,0 +1,38 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.services\\implementations\\transacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\transacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TransacService.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\TransacService.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\TransacService.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\TransacService.cs",
+              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\TransacService.cs",
+              "ViewState": "AgIAANQAAAAAAAAAAAAjwO8AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-23T05:23:17.741Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

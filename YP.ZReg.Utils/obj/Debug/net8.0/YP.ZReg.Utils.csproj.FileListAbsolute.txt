@@ -1,0 +1,15 @@
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\bin\Debug\net8.0\YP.ZReg.Utils.deps.json
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\bin\Debug\net8.0\YP.ZReg.Utils.dll
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\bin\Debug\net8.0\YP.ZReg.Utils.pdb
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\bin\Debug\net8.0\YP.ZReg.Entities.dll
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\bin\Debug\net8.0\YP.ZReg.Entities.pdb
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg.Utils.csproj.AssemblyReference.cache
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg.Utils.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg.Utils.AssemblyInfoInputs.cache
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg.Utils.AssemblyInfo.cs
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg.Utils.csproj.CoreCompileInputs.cache
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg..EB692C6D.Up2Date
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg.Utils.dll
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\refint\YP.ZReg.Utils.dll
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\YP.ZReg.Utils.pdb
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Utils\obj\Debug\net8.0\ref\YP.ZReg.Utils.dll
