@@ -9,24 +9,26 @@ using YP.ZReg.Services.Interfaces;
 namespace YP.Loader.app;
 public class Function1
 {
+    ICoreService crs;
     ITransacService trs;
     private readonly ILogger _logger;
     private SftpConfig s;
     private DBConfig d;
     private Configurations c;
-    public Function1(ITransacService _trs, ILoggerFactory loggerFactory,IOptions<SftpConfig> _s, IOptions<DBConfig> _d, IOptions<Configurations> _c)
+    public Function1(ICoreService _crs, ITransacService _trs, ILoggerFactory loggerFactory,IOptions<SftpConfig> _s, IOptions<DBConfig> _d, IOptions<Configurations> _c)
     {
         _logger = loggerFactory.CreateLogger<Function1>();
         s = _s.Value;
         d = _d.Value;
         c = _c.Value;
         trs = _trs;
+        crs = _crs;
     }
 
     [Function("Function1")]
     public async Task Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
     {
-        await trs.ReadFiles();
+        await crs.ReadFilesAsync();
         var str = s.User;
         var strd = d.ConnectionString;
         var l = c.EmpresasConfig;

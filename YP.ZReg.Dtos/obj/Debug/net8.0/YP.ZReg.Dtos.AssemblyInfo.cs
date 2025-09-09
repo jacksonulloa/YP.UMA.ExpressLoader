@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YP.ZReg.Dtos")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6d466be629739e12acca122191cf7725a1a9ef23")]
 [assembly: System.Reflection.AssemblyProductAttribute("YP.ZReg.Dtos")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YP.ZReg.Dtos")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

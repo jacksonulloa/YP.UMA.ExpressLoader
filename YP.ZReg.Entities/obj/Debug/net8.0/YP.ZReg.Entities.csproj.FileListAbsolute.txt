@@ -9,3 +9,4 @@ C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Entities\obj\Debug\net8.0\YP.
 C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Entities\obj\Debug\net8.0\refint\YP.ZReg.Entities.dll
 C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Entities\obj\Debug\net8.0\YP.ZReg.Entities.pdb
 C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Entities\obj\Debug\net8.0\ref\YP.ZReg.Entities.dll
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Entities\obj\Debug\net8.0\YP.ZReg.Entities.sourcelink.json

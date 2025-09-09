@@ -19,3 +19,4 @@ C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Services\obj\Debug\net8.0\YP.
 C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Services\obj\Debug\net8.0\refint\YP.ZReg.Services.dll
 C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Services\obj\Debug\net8.0\YP.ZReg.Services.pdb
 C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Services\obj\Debug\net8.0\ref\YP.ZReg.Services.dll
+C:\Users\julloa\source\repos\YP.Reg.Loader\YP.ZReg.Services\obj\Debug\net8.0\YP.ZReg.Services.sourcelink.json

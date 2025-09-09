@@ -6,7 +6,7 @@ namespace YP.ZReg.Services.Implementations
 {
     public class EmpresaCache(IEmpresaRepository _emr) : IEmpresaCache
     {
-        public List<Empresa> empresas = [];
+        public List<Empresa> empresas { get; set; } = [];
         private readonly IEmpresaRepository emr = _emr;
         public async Task InitializeAsync()
         {

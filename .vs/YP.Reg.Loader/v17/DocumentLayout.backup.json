@@ -3,8 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.loader.app\\local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|solutionrelative:yp.loader.app\\local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.loader.app\\function1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|solutionrelative:yp.loader.app\\function1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.services\\implementations\\coreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\coreservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.services\\implementations\\empresacache.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\empresacache.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.services\\implementations\\transacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\transacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3E0D840-A8D4-420E-8492-3C9C2F31DBDC}|YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.dtos\\models\\resumeprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3E0D840-A8D4-420E-8492-3C9C2F31DBDC}|YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj|solutionrelative:yp.zreg.dtos\\models\\resumeprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.entities\\generic\\empresapaths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|solutionrelative:yp.zreg.entities\\generic\\empresapaths.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.entities\\generic\\baseresponseextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|solutionrelative:yp.zreg.entities\\generic\\baseresponseextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|c:\\users\\julloa\\source\\repos\\yp.reg.loader\\yp.zreg.entities\\generic\\baseresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|solutionrelative:yp.zreg.entities\\generic\\baseresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,21 +46,119 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "TransacService.cs",
               "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\TransacService.cs",
               "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\TransacService.cs",
               "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\TransacService.cs",
               "RelativeToolTip": "YP.ZReg.Services\\Implementations\\TransacService.cs",
-              "ViewState": "AgIAANQAAAAAAAAAAAAjwO8AAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAOQBAAAAAAAAAAAkwPoBAABwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-23T05:23:17.741Z",
-              "IsPinned": true,
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Function1.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.Loader.app\\Function1.cs",
+              "RelativeDocumentMoniker": "YP.Loader.app\\Function1.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.Loader.app\\Function1.cs",
+              "RelativeToolTip": "YP.Loader.app\\Function1.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAjwB4AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T05:55:24.989Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmpresaCache.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\EmpresaCache.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\EmpresaCache.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\EmpresaCache.cs",
+              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\EmpresaCache.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T03:22:30.459Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CoreService.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\CoreService.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\CoreService.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\CoreService.cs",
+              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\CoreService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEwAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-08T19:47:38.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "local.settings.json",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.Loader.app\\local.settings.json",
+              "RelativeDocumentMoniker": "YP.Loader.app\\local.settings.json",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.Loader.app\\local.settings.json",
+              "RelativeToolTip": "YP.Loader.app\\local.settings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-08T16:08:53.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EmpresaPaths.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\Generic\\EmpresaPaths.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Entities\\Generic\\EmpresaPaths.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\Generic\\EmpresaPaths.cs",
+              "RelativeToolTip": "YP.ZReg.Entities\\Generic\\EmpresaPaths.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T22:56:43.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ResumeProcess.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Dtos\\Models\\ResumeProcess.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Dtos\\Models\\ResumeProcess.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Dtos\\Models\\ResumeProcess.cs",
+              "RelativeToolTip": "YP.ZReg.Dtos\\Models\\ResumeProcess.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T20:25:11.217Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BaseResponseExtension.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\Generic\\BaseResponseExtension.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Entities\\Generic\\BaseResponseExtension.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\Generic\\BaseResponseExtension.cs",
+              "RelativeToolTip": "YP.ZReg.Entities\\Generic\\BaseResponseExtension.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T20:20:56.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BaseResponse.cs",
+              "DocumentMoniker": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\Generic\\BaseResponse.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Entities\\Generic\\BaseResponse.cs",
+              "ToolTip": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\Generic\\BaseResponse.cs",
+              "RelativeToolTip": "YP.ZReg.Entities\\Generic\\BaseResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T20:20:51.424Z"
             }
           ]
         }

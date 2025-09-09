@@ -69,7 +69,8 @@ namespace YP.Loader.app
         {            
             ListServices.AddSingleton<IAzureSftp, AzureSftp>();
             ListServices.AddTransient<ITransacService, TransacService>();
-            ListServices.AddSingleton<EmpresaCache>();
+            ListServices.AddTransient<ICoreService, CoreService>();
+            ListServices.AddSingleton<IEmpresaCache, EmpresaCache>();
         }
         public static void ConfigUtilities(IServiceCollection ListUtilities)
         {
