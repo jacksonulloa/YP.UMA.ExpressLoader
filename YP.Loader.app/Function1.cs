@@ -28,15 +28,15 @@ public class Function1
     [Function("Function1")]
     public async Task Run([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
     {
-        await crs.ReadFilesAsync();
-        var str = s.User;
-        var strd = d.ConnectionString;
-        var l = c.EmpresasConfig;
-        _logger.LogInformation("C# Timer trigger function executed at: {executionTime}", DateTime.Now);
+        //await crs.ReadFilesAsync();
+        //var str = s.User;
+        //var strd = d.ConnectionString;
+        //var l = c.EmpresasConfig;
+        //_logger.LogInformation("C# Timer trigger function executed at: {executionTime}", DateTime.Now);
         
-        if (myTimer.ScheduleStatus is not null)
-        {
-            _logger.LogInformation("Next timer schedule at: {nextSchedule}", myTimer.ScheduleStatus.Next);
-        }
+        //if (myTimer.ScheduleStatus is not null)
+        //{
+        //    _logger.LogInformation("Next timer schedule at: {nextSchedule}", myTimer.ScheduleStatus.Next);
+        //}
     }
 }

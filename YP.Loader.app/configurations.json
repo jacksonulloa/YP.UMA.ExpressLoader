@@ -11,6 +11,13 @@
         "Codigo": "500",
         "Servicios": [ "001", "002" ]
       }
-    ]
+    ],
+    "JwtAlterConfig": {
+      "Audience": "localhost",
+      "Issuer": "asbanc",
+      "MinutesFactor": "60",
+      "HoursFactor": "24",
+      "DaysFactor": "365"
+    }
   }  
 }

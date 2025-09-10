@@ -33,11 +33,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj",
+      "projectUniqueName": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj",
       "projectName": "YP.ZReg.Dtos",
-      "projectPath": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj",
+      "projectPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj",
       "packagesPath": "C:\\Users\\julloa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Dtos\\obj\\",
+      "outputPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Dtos\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,8 +59,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj": {
-              "projectPath": "C:\\Users\\julloa\\source\\repos\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj"
+            "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj": {
+              "projectPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj"
             }
           }
         }

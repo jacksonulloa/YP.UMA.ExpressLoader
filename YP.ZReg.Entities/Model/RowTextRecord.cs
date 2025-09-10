@@ -7,7 +7,7 @@
         public string NombreCliente { get; set; } = string.Empty;
         public string CodigoServicio { get; set; } = string.Empty;
         public string NroDocumento { get; set; } = string.Empty;
-        public string NomServicio { get; set; } = string.Empty;
+        public string Glosa { get; set; } = string.Empty;
         public string FechaVencimiento { get; set; } = string.Empty;
         public string FechaEmision { get; set; } = string.Empty;
         public string ImporteBruto { get; set; } = string.Empty;

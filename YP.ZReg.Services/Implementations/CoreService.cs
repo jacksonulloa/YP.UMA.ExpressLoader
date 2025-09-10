@@ -185,7 +185,7 @@ namespace YP.ZReg.Services.Implementations
                     NombreCliente = linea.Substring(15, 30).Trim(),
                     CodigoServicio = linea.Substring(45, 3).Trim(),
                     NroDocumento = linea.Substring(48, 16).Trim(),
-                    NomServicio = linea.Substring(64, 20).Trim(),
+                    Glosa = linea.Substring(64, 20).Trim(),
                     FechaVencimiento = linea.Substring(84, 8).Trim(),
                     FechaEmision = linea.Substring(92, 8).Trim(),
                     ImporteBruto = linea.Substring(100, 12),
@@ -252,19 +252,17 @@ namespace YP.ZReg.Services.Implementations
             }
             return (resume, record);
         }
-        private ResumeProcess SetInitialResumeProcess(string fileName, string fileType)
+        private ResumeProcess SetInitialResumeProcess(string fileName, string fileType) => new()
         {
-            return new ResumeProcess
-            {
-                FileName = fileName,
-                FileType = fileType,
-                TotalRecords = "0",
-                ErrorRecords = "0",
-                StartExec = DateTime.Now,
-                EndExec = DateTime.Now,
-                ErrorDetails = []
-            };
-        }
+            FileName = fileName,
+            FileType = fileType,
+            TotalRecords = "0",
+            ErrorRecords = "0",
+            StartExec = DateTime.Now,
+            EndExec = DateTime.Now,
+            ErrorDetails = []
+        };
+
         private static void SetFinalResumeProcess(ResumeProcess resumeProcess, string total, string errors, List<ResumeErrorRecord> errorsDetail)
         {
             resumeProcess.EndExec = DateTime.Now;

@@ -7,11 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\Response\" />
-    <Folder Include="Contracts\Request\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\YP.ZReg.Entities\YP.ZReg.Entities.csproj" />
   </ItemGroup>
 

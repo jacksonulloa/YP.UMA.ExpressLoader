@@ -8,5 +8,6 @@ namespace YP.ZReg.Repositories.Interfaces
         Task EliminarDeudaPorHash(Deuda deuda);
         Task EliminarDeudaPorEmpresa(string codigo_empresa);
         Task ActualizarDeudaEnCarga(Deuda deuda);
+        Task<List<Cliente>> ConsultarDeuda(string empresa, string servicio, string llave, CancellationToken ct = default);
     }
 }

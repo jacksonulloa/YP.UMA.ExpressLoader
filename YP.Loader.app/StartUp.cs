@@ -21,6 +21,8 @@ namespace YP.Loader.app
                 .BindConfiguration("SftpConfig");
             services.AddOptions<DBConfig>()
                 .BindConfiguration("DbConf");
+            services.AddOptions<JwtConfig>()
+                .BindConfiguration("JwtConfig");
             ConfigRepositories(services);
             ConfigBusinessServices(services);
             ConfigAutoMapper(services);
@@ -66,11 +68,13 @@ namespace YP.Loader.app
             ListRepositories.AddTransient<IEmpresaRepository, EmpresaRepository>();
         }
         public static void ConfigBusinessServices(IServiceCollection ListServices)
-        {            
+        {
             ListServices.AddSingleton<IAzureSftp, AzureSftp>();
             ListServices.AddTransient<ITransacService, TransacService>();
             ListServices.AddTransient<ICoreService, CoreService>();
             ListServices.AddSingleton<IEmpresaCache, EmpresaCache>();
+            ListServices.AddSingleton<IApiSecurityService, ApiSecurityService>();
+            ListServices.AddSingleton<IApiTransacService, ApiTransacService>();
         }
         public static void ConfigUtilities(IServiceCollection ListUtilities)
         {

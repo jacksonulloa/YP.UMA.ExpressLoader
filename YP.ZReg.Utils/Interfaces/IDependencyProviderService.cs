@@ -8,6 +8,7 @@ namespace YP.ZReg.Utils.Interfaces
         Configurations cnf { get; }
         DBConfig dbc { get; }
         SftpConfig sft { get; }
+        JwtConfig jwc { get; }
         IMapper mpr { get; }
     }
 }
