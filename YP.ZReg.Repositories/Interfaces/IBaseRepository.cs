@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace YP.ZReg.Repositories.Interfaces
 {
@@ -41,5 +42,8 @@ namespace YP.ZReg.Repositories.Interfaces
         //    Func<TParent, TKey> keyParent,
         //    CancellationToken ct = default)
         //    where TKey : notnull;
+        SqlParameter SetParameter(string name, SqlDbType type, object? value, int size = 0,
+                                 ParameterDirection direction = ParameterDirection.Input,
+                                 byte precision = 0, byte scale = 0);
     }
 }

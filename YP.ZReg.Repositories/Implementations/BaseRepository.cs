@@ -386,5 +386,22 @@ namespace YP.ZReg.Repositories.Implementations
             var t = Nullable.GetUnderlyingType(typeof(T)) ?? typeof(T);
             return (T)Convert.ChangeType(value, t, CultureInfo.InvariantCulture);
         }
+        public SqlParameter SetParameter(string name, SqlDbType type, object? value, int size = 0,
+                                 ParameterDirection direction = ParameterDirection.Input,
+                                 byte precision = 0, byte scale = 0)
+        {
+            var p = new SqlParameter(name, type)
+            {
+                Direction = direction,
+                Value = value ?? DBNull.Value
+            };
+            if (size > 0) p.Size = size;
+            if (type == SqlDbType.Decimal && precision > 0)
+            {
+                p.Precision = precision;
+                p.Scale = scale;
+            }
+            return p;
+        }
     }
 }

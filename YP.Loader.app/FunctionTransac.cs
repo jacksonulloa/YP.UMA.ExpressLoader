@@ -17,7 +17,7 @@ namespace YP.Loader.app
     {
         private readonly IApiSecurityService ass = _ass;
         private readonly IApiTransacService ats = _ats;
-        private IDependencyProviderService dps = _dps;
+        private readonly IDependencyProviderService dps = _dps;
 
         [Function("ObtenerToken")]
         [OpenApiOperation(operationId: "ObtenerToken", tags: new[] { "Seguridad" })]

@@ -75,6 +75,6 @@ namespace YP.ZReg.Utils.Helpers
             var response = req.CreateResponse(HttpStatusCode.Unauthorized);
             await response.WriteAsJsonAsync(res);
             return response;
-        }
+        }        
     }
 }

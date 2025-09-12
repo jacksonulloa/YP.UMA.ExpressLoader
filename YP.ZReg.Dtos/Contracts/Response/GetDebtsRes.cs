@@ -9,6 +9,7 @@ namespace YP.ZReg.Dtos.Contracts.Response
     }
     public class Debt
     {
+        public string idDeuda { get; set; } = string.Empty;
         public string servicio { get; set; } = string.Empty;
         public string documento { get; set; } = string.Empty;
         public string descripcionDoc { get; set; } = string.Empty;

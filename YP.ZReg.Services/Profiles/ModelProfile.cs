@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using System.Globalization;
+using YP.ZReg.Dtos.Contracts.Request;
 using YP.ZReg.Dtos.Contracts.Response;
 using YP.ZReg.Entities.Generic;
 using YP.ZReg.Entities.Model;
@@ -18,7 +20,7 @@ namespace YP.ZReg.Services.Profiles
                 .ForMember(d => d.glosa, opt => opt.MapFrom(s => s.Glosa))
                 .ForMember(d => d.fecha_vencimiento, opt => opt.MapFrom(s => TxtProcessor.ConvertToDate(s.FechaVencimiento)))
                 .ForMember(d => d.fecha_emision, opt => opt.MapFrom(s => TxtProcessor.ConvertToDate(s.FechaEmision)))
-                .ForMember(d => d.importe_total, opt => opt.MapFrom(s => 
+                .ForMember(d => d.saldo, opt => opt.MapFrom(s => 
                     (TxtProcessor.ConvertToDecimal(s.ImporteBruto, 2) +
                     TxtProcessor.ConvertToDecimal(s.Mora, 2) +
                     TxtProcessor.ConvertToDecimal(s.GastoAdministrativo, 2)
@@ -40,14 +42,47 @@ namespace YP.ZReg.Services.Profiles
             CreateMap<BaseResponse, ExecPaymentRes>();
             CreateMap<BaseResponse, ExecReverseRes>();
             CreateMap<Deuda, Debt>()
+                .ForMember(d => d.idDeuda, opt => opt.MapFrom(s => s.id))
                 .ForMember(d => d.servicio, opt => opt.MapFrom(s => s.servicio))
                 .ForMember(d => d.documento, opt => opt.MapFrom(s => s.numero_documento))
-                .ForMember(d => d.descripcionDoc, opt => opt.MapFrom(s => s.numero_documento))
+                .ForMember(d => d.descripcionDoc, opt => opt.MapFrom(s => s.glosa))
                 .ForMember(d => d.fechaVencimiento, opt => opt.MapFrom(s => $"{s.fecha_vencimiento:yyyyMMdd}"))
                 .ForMember(d => d.fechaEmision, opt => opt.MapFrom(s => $"{s.fecha_emision:yyyyMMdd}"))
-                .ForMember(d => d.deuda, opt => opt.MapFrom(s => (s.importe_bruto + s.mora + s.gasto_administrativo)))
+                .ForMember(d => d.deuda, opt => opt.MapFrom(s => s.saldo))
                 .ForMember(d => d.pagoMinimo, opt => opt.MapFrom(s => s.importe_minimo))
                 .ForMember(d => d.moneda, opt => opt.MapFrom(s => s.moneda));
+
+            CreateMap<ExecPaymentReq, Transaccion>()
+                .ForMember(d => d.fecha_hora_transaccion, opt => opt.MapFrom(s => DateTime.ParseExact(
+                    s.fechaTxn + s.horaTxn,
+                    "ddMMyyyyHHmmss",
+                    CultureInfo.InvariantCulture
+                )))
+                .ForMember(d => d.id_canal_pago, opt => opt.MapFrom(s => s.idCanal))
+                .ForMember(d => d.id_forma_pago, opt => opt.MapFrom(s => s.idForma))
+                .ForMember(d => d.numero_operacion, opt => opt.MapFrom(s => s.numeroOperacion))
+                .ForMember(d => d.id_consulta, opt => opt.MapFrom(s => s.idConsulta))
+                .ForMember(d => d.servicio, opt => opt.MapFrom(s => s.servicio))
+                .ForMember(d => d.numero_documento, opt => opt.MapFrom(s => s.numeroDocumento))
+                .ForMember(d => d.importe_pagado, opt => opt.MapFrom(s => s.importePagado))
+                .ForMember(d => d.moneda, opt => opt.MapFrom(s => s.moneda))
+                .ForMember(d => d.id_empresa, opt => opt.MapFrom(s => s.idEmpresa))
+                .ForMember(d => d.id_banco, opt => opt.MapFrom(s => s.idBanco))
+                .ForMember(d => d.voucher, opt => opt.MapFrom(s => s.voucher))
+                .ForMember(d => d.id_deuda, opt => opt.MapFrom(s => s.referenciaDeuda));
+            CreateMap<ExecReverseReq, Transaccion>()
+                .ForMember(d => d.fecha_hora_transaccion, opt => opt.MapFrom(s => DateTime.ParseExact(
+                    s.fechaTxn + s.horaTxn,
+                    "ddMMyyyyHHmmss",
+                    CultureInfo.InvariantCulture
+                )))
+                .ForMember(d => d.id_banco, opt => opt.MapFrom(s => s.idBanco))
+                .ForMember(d => d.servicio, opt => opt.MapFrom(s => s.idServicio))
+                .ForMember(d => d.id_consulta, opt => opt.MapFrom(s => s.idConsulta))
+                .ForMember(d => d.numero_operacion, opt => opt.MapFrom(s => s.numeroOperacion))
+                .ForMember(d => d.numero_documento, opt => opt.MapFrom(s => s.numeroDocumento))
+                .ForMember(d => d.id_empresa, opt => opt.MapFrom(s => s.idEmpresa))
+                .ForMember(d => d.voucher, opt => opt.MapFrom(s => s.voucher));                
         }
     }
 }

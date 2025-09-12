@@ -10,7 +10,7 @@
         public string llave_alterna { get; set; } = string.Empty;
         public DateTime fecha_vencimiento { get; set; }
         public DateTime fecha_emision { get; set; }
-        public decimal importe_total { get; set; }
+        public decimal saldo { get; set; }
         public decimal importe_bruto { get; set; }
         public decimal mora { get; set; }
         public decimal gasto_administrativo { get; set; }

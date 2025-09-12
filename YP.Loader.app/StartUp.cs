@@ -66,6 +66,7 @@ namespace YP.Loader.app
             ListRepositories.AddSingleton<IBaseRepository, BaseRepository>();
             ListRepositories.AddTransient<IDeudaRepository, DeudaRepository>();
             ListRepositories.AddTransient<IEmpresaRepository, EmpresaRepository>();
+            ListRepositories.AddTransient<ITransaccionRepository, TransaccionRepository>();
         }
         public static void ConfigBusinessServices(IServiceCollection ListServices)
         {

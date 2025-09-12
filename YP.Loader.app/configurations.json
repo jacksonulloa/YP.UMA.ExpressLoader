@@ -1,11 +1,11 @@
 {
   "Configurations": {
     "EmpresasConfig": [
-      //{
-      //  "Nombre": "Empresa 01",
-      //  "Codigo": "801",
-      //  "Servicios": ["001", "002"]
-      //},
+      {
+        "Nombre": "Empresa 01",
+        "Codigo": "801",
+        "Servicios": ["001", "002"]
+      },
       {
         "Nombre": "Empresa 02",
         "Codigo": "500",

@@ -1,10 +1,8 @@
-using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using YP.Loader.app;
-using YP.ZReg.Services.Implementations;
 using YP.ZReg.Services.Interfaces;
 
 var builder = FunctionsApplication.CreateBuilder(args);
