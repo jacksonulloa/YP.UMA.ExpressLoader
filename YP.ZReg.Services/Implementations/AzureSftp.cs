@@ -1,5 +1,6 @@
 ﻿using Renci.SshNet;
 using System.Text;
+using YP.ZReg.Entities.Model;
 using YP.ZReg.Services.Interfaces;
 using YP.ZReg.Utils.Interfaces;
 
@@ -81,11 +82,84 @@ namespace YP.ZReg.Services.Implementations
             finally { if (c.IsConnected) c.Disconnect(); }
         }
 
+        public async Task<(List<long>, List<long>)> WriteAllLinesAsync(
+            string remoteFilePath,
+            List<Transaccion> transacciones,
+            Encoding? encoding = null,
+            CancellationToken ct = default)
+        {
+            List<long> listaOk = [];
+            List<long> listaError = [];
+            using var c = CreateClient();
+            c.Connect();
+            try
+            {
+                using var s = c.Create(remoteFilePath); // sobrescribe el archivo
+                using var w = new StreamWriter(s, encoding ?? Encoding.UTF8);
+                foreach (var transaccion in transacciones)
+                {
+                    ct.ThrowIfCancellationRequested();
+                    try
+                    {
+                        string linea = ConvertirTransaccion(transaccion);
+                        await w.WriteLineAsync(linea);
+                        listaOk.Add(transaccion.id);
+                    }
+                    catch (Exception ex)
+                    {
+                        listaError.Add(transaccion.id);
+                    }
+                }
+                await w.FlushAsync(); // asegura que todo se envíe
+            }
+            finally { if (c.IsConnected) c.Disconnect(); }
+            return (listaOk, listaError);
+        }
+        private string ConvertirTransaccion(Transaccion t)
+        {
+            var sb = new StringBuilder();
+
+            // 01 Tipo de registro (Constante "DD")
+            sb.Append("DD".PadRight(2));
+            // 02 Código de identificación del cliente (id_consulta) 14 chars
+            sb.Append((t.id_consulta ?? "").PadRight(14));
+            // 03 Nombre Cliente 
+            sb.Append((t.nombre_cliente ?? "").PadRight(30));
+            // 04 Código producto (servicio) 3 chars
+            sb.Append((t.servicio ?? "").PadRight(3));
+            // 05 Número de documento 16 chars
+            sb.Append((t.numero_documento ?? "").PadRight(16));
+            // 06 Fecha vencimiento (no está en tu clase) → vacía 8 chars
+            sb.Append(t.fecha_hora_transaccion.ToString("ddMMyyyy"));
+            // 07 Fecha de pago (fecha_hora_transaccion.Date) DDMMAAAA
+            sb.Append(t.fecha_hora_transaccion.ToString("ddMMyyyy"));
+            // 08 Hora de pago (fecha_hora_transaccion.TimeOfDay) HHmmss
+            sb.Append(t.fecha_hora_transaccion.ToString("HHmmss"));
+            // 09 Importe pagado (15, sin punto decimal) → ejemplo: 000000000001550
+            sb.Append(((long)(t.importe_pagado * 100)).ToString().PadLeft(15, '0'));
+            // 10 Agencia (id_banco) 15 chars
+            sb.Append(new string(' ', 15));
+            // 11 Dirección Agencia (no está en tu clase) → vacío 40 chars
+            sb.Append(new string(' ', 40));
+            // 12 Número de operación 12 chars
+            sb.Append((t.numero_operacion ?? "").PadRight(12));
+            // 13 Canal de pago 2 chars
+            sb.Append((t.id_canal_pago ?? "").PadRight(2));
+            // 14 Forma de pago 2 chars
+            sb.Append((t.id_forma_pago ?? "").PadRight(2));
+            // 15 Fecha contable (no la tienes, usamos la misma fecha) DDMMAAAA
+            sb.Append(t.fecha_hora_transaccion.ToString("ddMMyyyy"));
+            // 16 Banco (libre) 30 chars
+            sb.Append((t.id_banco ?? "").PadRight(4));
+            sb.Append((t.cuenta_banco ?? "").PadRight(20));
+            sb.Append((t.voucher ?? "").PadRight(20));
+            return sb.ToString();
+        }
+
         /*
          COMO USAR ReadAllLinesAsync
         var lines = await _sftp.ReadAllLinesAsync("/rootlog/clavesftptest.txt", Encoding.UTF8, ct);
          */
-
         public async Task ReadLinesStreamAsync(
             string remoteFilePath,
             Func<string, Task> onLine,                 // callback por línea

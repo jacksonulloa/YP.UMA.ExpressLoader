@@ -3,28 +3,40 @@
   "WorkspaceRootPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.loader.app\\functiontransac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|solutionrelative:yp.loader.app\\functiontransac.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.services\\implementations\\generatorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\generatorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.services\\implementations\\apitransacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\apitransacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.loader.app\\local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|solutionrelative:yp.loader.app\\local.settings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{59BAF816-F9D6-4FCE-B27F-4B6B5CDC7FBC}|YP.ZReg.Utils\\YP.ZReg.Utils.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.utils\\helpers\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{59BAF816-F9D6-4FCE-B27F-4B6B5CDC7FBC}|YP.ZReg.Utils\\YP.ZReg.Utils.csproj|solutionrelative:yp.zreg.utils\\helpers\\jwthelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.services\\implementations\\loaderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\loaderservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.services\\implementations\\transacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\transacservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.services\\implementations\\azuresftp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{162E516F-7213-4DC2-B7AF-87B7BA1977CE}|YP.ZReg.Services\\YP.ZReg.Services.csproj|solutionrelative:yp.zreg.services\\implementations\\azuresftp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{59BAF816-F9D6-4FCE-B27F-4B6B5CDC7FBC}|YP.ZReg.Utils\\YP.ZReg.Utils.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.utils\\extensions\\httprequestextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{59BAF816-F9D6-4FCE-B27F-4B6B5CDC7FBC}|YP.ZReg.Utils\\YP.ZReg.Utils.csproj|solutionrelative:yp.zreg.utils\\extensions\\httprequestextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8FA9425C-67D8-466F-8176-0B1390D3C57E}|YP.ZReg.Repositories\\YP.ZReg.Repositories.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.repositories\\implementations\\transaccionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8FA9425C-67D8-466F-8176-0B1390D3C57E}|YP.ZReg.Repositories\\YP.ZReg.Repositories.csproj|solutionrelative:yp.zreg.repositories\\implementations\\transaccionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{59BAF816-F9D6-4FCE-B27F-4B6B5CDC7FBC}|YP.ZReg.Utils\\YP.ZReg.Utils.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.utils\\extensions\\httpresponseextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{59BAF816-F9D6-4FCE-B27F-4B6B5CDC7FBC}|YP.ZReg.Utils\\YP.ZReg.Utils.csproj|solutionrelative:yp.zreg.utils\\extensions\\httpresponseextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.loader.app\\configurations.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{059646CB-DCB8-4EB2-B21E-28695F392E7D}|YP.Loader.app\\YP.Loader.app.csproj|solutionrelative:yp.loader.app\\configurations.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.entities\\model\\transaccion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2F082C02-3F75-422D-A86B-84EC60B1E686}|YP.ZReg.Entities\\YP.ZReg.Entities.csproj|solutionrelative:yp.zreg.entities\\model\\transaccion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3E0D840-A8D4-420E-8492-3C9C2F31DBDC}|YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.dtos\\models\\resumegeneratorprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3E0D840-A8D4-420E-8492-3C9C2F31DBDC}|YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj|solutionrelative:yp.zreg.dtos\\models\\resumegeneratorprocess.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3E0D840-A8D4-420E-8492-3C9C2F31DBDC}|YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj|d:\\proyectos\\yapagoexpress\\procesodbsql\\yp.reg.loader\\yp.zreg.dtos\\models\\resumeerrorrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3E0D840-A8D4-420E-8492-3C9C2F31DBDC}|YP.ZReg.Dtos\\YP.ZReg.Dtos.csproj|solutionrelative:yp.zreg.dtos\\models\\resumeerrorrecord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +46,116 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ApiTransacService.cs",
-              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\ApiTransacService.cs",
-              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\ApiTransacService.cs",
-              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\ApiTransacService.cs",
-              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\ApiTransacService.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAQwB4AAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T21:42:30.431Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TransacService.cs",
-              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\TransacService.cs",
-              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\TransacService.cs",
-              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\TransacService.cs",
-              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\TransacService.cs",
-              "ViewState": "AgIAADkBAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T20:53:30.128Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "HttpRequestExtensions.cs",
-              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Utils\\Extensions\\HttpRequestExtensions.cs",
-              "RelativeDocumentMoniker": "YP.ZReg.Utils\\Extensions\\HttpRequestExtensions.cs",
-              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Utils\\Extensions\\HttpRequestExtensions.cs",
-              "RelativeToolTip": "YP.ZReg.Utils\\Extensions\\HttpRequestExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T21:30:28.423Z",
+              "Title": "local.settings.json",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.Loader.app\\local.settings.json",
+              "RelativeDocumentMoniker": "YP.Loader.app\\local.settings.json",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.Loader.app\\local.settings.json",
+              "RelativeToolTip": "YP.Loader.app\\local.settings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-16T05:23:19.751Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "HttpResponseExtensions.cs",
-              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Utils\\Extensions\\HttpResponseExtensions.cs",
-              "RelativeDocumentMoniker": "YP.ZReg.Utils\\Extensions\\HttpResponseExtensions.cs",
-              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Utils\\Extensions\\HttpResponseExtensions.cs",
-              "RelativeToolTip": "YP.ZReg.Utils\\Extensions\\HttpResponseExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAARAAAAAAAAAA==",
+              "Title": "configurations.json",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.Loader.app\\configurations.json",
+              "RelativeDocumentMoniker": "YP.Loader.app\\configurations.json",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.Loader.app\\configurations.json",
+              "RelativeToolTip": "YP.Loader.app\\configurations.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-09-15T23:36:11.806Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TransaccionRepository.cs",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Repositories\\Implementations\\TransaccionRepository.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Repositories\\Implementations\\TransaccionRepository.cs",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Repositories\\Implementations\\TransaccionRepository.cs",
+              "RelativeToolTip": "YP.ZReg.Repositories\\Implementations\\TransaccionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T21:26:01.922Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-15T23:26:04.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Transaccion.cs",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\Model\\Transaccion.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Entities\\Model\\Transaccion.cs",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\Model\\Transaccion.cs",
+              "RelativeToolTip": "YP.ZReg.Entities\\Model\\Transaccion.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAywBcAAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T23:19:59.679Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ResumeErrorRecord.cs",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Dtos\\Models\\ResumeErrorRecord.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Dtos\\Models\\ResumeErrorRecord.cs",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Dtos\\Models\\ResumeErrorRecord.cs",
+              "RelativeToolTip": "YP.ZReg.Dtos\\Models\\ResumeErrorRecord.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T23:08:38.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AzureSftp.cs",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\AzureSftp.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\AzureSftp.cs",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\AzureSftp.cs",
+              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\AzureSftp.cs",
+              "ViewState": "AgIAAMMAAAAAAAAAAAAswMEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T22:14:14.65Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ResumeGeneratorProcess.cs",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Dtos\\Models\\ResumeGeneratorProcess.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Dtos\\Models\\ResumeGeneratorProcess.cs",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Dtos\\Models\\ResumeGeneratorProcess.cs",
+              "RelativeToolTip": "YP.ZReg.Dtos\\Models\\ResumeGeneratorProcess.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T22:10:27.797Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "JwtHelper.cs",
-              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Utils\\Helpers\\JwtHelper.cs",
-              "RelativeDocumentMoniker": "YP.ZReg.Utils\\Helpers\\JwtHelper.cs",
-              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Utils\\Helpers\\JwtHelper.cs",
-              "RelativeToolTip": "YP.ZReg.Utils\\Helpers\\JwtHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAfAAAAAAAAAA==",
+              "Title": "LoaderService.cs",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\LoaderService.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\LoaderService.cs",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\LoaderService.cs",
+              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\LoaderService.cs",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAYwJ8AAAB+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T21:01:02.257Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-15T22:08:59.361Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FunctionTransac.cs",
-              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.Loader.app\\FunctionTransac.cs",
-              "RelativeDocumentMoniker": "YP.Loader.app\\FunctionTransac.cs",
-              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.Loader.app\\FunctionTransac.cs",
-              "RelativeToolTip": "YP.Loader.app\\FunctionTransac.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAC4AAAA8AAAAAAAAAA==",
+              "Title": "GeneratorService.cs",
+              "DocumentMoniker": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\GeneratorService.cs",
+              "RelativeDocumentMoniker": "YP.ZReg.Services\\Implementations\\GeneratorService.cs",
+              "ToolTip": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Services\\Implementations\\GeneratorService.cs",
+              "RelativeToolTip": "YP.ZReg.Services\\Implementations\\GeneratorService.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAewBUAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T20:52:49.508Z",
+              "WhenOpened": "2025-09-15T16:44:43.017Z",
               "EditorCaption": ""
             }
           ]

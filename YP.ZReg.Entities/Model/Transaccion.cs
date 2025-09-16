@@ -21,6 +21,8 @@
         public string id_banco { get; set; } = string.Empty;
         public string voucher{ get; set; } = string.Empty;
         public string cuenta_banco { get; set; } = string.Empty;
+        public string nombre_cliente { get; set; } = string.Empty;
+
         /// <summary>
         /// P:Pending | S:Sent
         /// </summary>

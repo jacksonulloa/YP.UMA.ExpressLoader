@@ -81,5 +81,42 @@ namespace YP.ZReg.Repositories.Implementations
             }
             return (idGen, nombreCliente);
         }
+        public async Task<List<Transaccion>> ConsultarDeuda(string empresa, string estado, CancellationToken ct = default)
+        {
+            List<Transaccion> response = [];
+            try
+            {
+                var parametros = new List<SqlParameter>
+                                    {
+                                        new("@p_empresa", empresa),
+                                        new("@p_estado", estado)
+                                    };
+                response = await bre.EjecutarConsultaSpAsync<Transaccion>(
+                                    "[Transac].[Usp_Listar_Transacciones_Por_Empresa_Estado]",
+                                    parametros, ct);
+                            
+            }
+            catch
+            {
+                throw;
+            }
+            return response;
+        }
+        public async Task ActualizarEstadoTransacciones(string empresa, string ids, string estado)
+        {
+            try
+            {
+                List<SqlParameter> parameters = [
+                    new(){ ParameterName = "@p_empresa", DbType = DbType.String , Value = empresa},
+                    new(){ ParameterName = "@p_ids_ok", DbType = DbType.String , Value = ids},
+                    new(){ ParameterName = "@p_estado", DbType = DbType.String , Value = estado}
+                ];
+                await bre.EjecutarNonQuerySpAsync("[Transac].[Usp_Actualizar_estado_transaccion_por_empresa]", parameters);
+            }
+            catch
+            {
+                throw;
+            }
+        }
     }
 }

@@ -8,6 +8,18 @@ namespace YP.ZReg.Utils.Helpers
 {
     public class ToolHelper
     {
+        public static EmpresaPaths CreateEmpresaPaths(string pathCore, string empresaCodigo)
+        {
+            string root = $"{pathCore}/{empresaCodigo}";
+            return new EmpresaPaths
+            {
+                DeudasRoot = $"{root}/Deudas",
+                DeudasPending = $"{root}/Deudas/Pending",
+                DeudasComplete = $"{root}/Deudas/Complete",
+                DeudasError = $"{root}/Deudas/Error",
+                PagosRoot = $"{root}/Pagos",
+            };
+        }
         public static string CalcularDuracion(DateTime fechaIni, DateTime fechaFin)
         {
             TimeSpan duracion = fechaFin - fechaIni;

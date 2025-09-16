@@ -2,7 +2,7 @@
 
 namespace YP.ZReg.Services.Interfaces
 {
-    public interface ICoreService
+    public interface ILoaderService
     {
         Task<BaseResponseExtension> ReadFilesAsync();
     }

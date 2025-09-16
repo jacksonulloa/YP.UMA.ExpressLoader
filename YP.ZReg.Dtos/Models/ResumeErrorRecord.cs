@@ -1,6 +1,4 @@
-﻿using YP.ZReg.Entities.Generic;
-
-namespace YP.ZReg.Dtos.Models
+﻿namespace YP.ZReg.Dtos.Models
 {
     public class ResumeErrorRecord
     {

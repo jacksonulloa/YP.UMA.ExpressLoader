@@ -12,8 +12,8 @@ using YP.ZReg.Utils.Interfaces;
 
 namespace YP.ZReg.Services.Implementations
 {
-    public class CoreService(IDependencyProviderService _dps, IAzureSftp _ass, IDeudaRepository _dre,
-        IEmpresaCache _eca) : ICoreService
+    public class LoaderService(IDependencyProviderService _dps, IAzureSftp _ass, IDeudaRepository _dre,
+        IEmpresaCache _eca) : ILoaderService
     {
         private readonly IDependencyProviderService dps = _dps;
         private readonly IAzureSftp ass = _ass;
@@ -62,26 +62,26 @@ namespace YP.ZReg.Services.Implementations
         }
         private async Task ProcesarEmpresaAsync(EmpresaConfig empresa)
         {
-            ResumeProcess resumeProcess = SetInitialResumeProcess("NoApply", "NoApply");
+            ResumeLoadProcess resumeProcess = SetInitialResumeProcess("NoApply", "NoApply");
             //ResumeErrorRecord resumeErrorRecord = new();
-            List<ResumeErrorRecord> listaErrores = [];
-            EmpresaPaths paths = CreateEmpresaPaths(dps.sft.Root, empresa.Codigo);
+            List<ResumeLoadErrorRecord> listaErrores = [];
+            EmpresaPaths paths = ToolHelper.CreateEmpresaPaths(dps.sft.Root, empresa.Codigo);
             var empresasFounded = eca.empresas.Where(x => x.id_proveedor.Equals(empresa.Codigo)).ToList();
             if (empresasFounded.Count == 0)
             {
-                listaErrores.Add(new ResumeErrorRecord
+                listaErrores.Add(new ResumeLoadErrorRecord
                 {
                     Row = "Generic",
                     Results = ["El codigo de la carpeta no se asocia a una empresa dentro de la base de datos"]
                 });
                 SetFinalResumeProcess(resumeProcess, "0", "0", listaErrores);
-                string fileNewName = $"ERROR:{empresa.Codigo}_{resumeProcess.EndExec:ddMMyyyyhhmmssfff}";
+                string fileNewName = $"ERROR_{empresa.Codigo}_{resumeProcess.EndExec:ddMMyyyyhhmmssfff}";
                 string json = JsonSerializer.Serialize(resumeProcess, new JsonSerializerOptions { WriteIndented = true });
-                string archivoFinal = $"{paths.Complete}/{fileNewName}";
-                await ass.UploadJsonAsync($"{paths.Complete}/resume_{fileNewName}.json", json, Encoding.UTF8, default);
+                string archivoFinal = $"{paths.DeudasComplete}/{fileNewName}";
+                await ass.UploadJsonAsync($"{paths.DeudasComplete}/resume_{fileNewName}.json", json, Encoding.UTF8, default);
                 return;
             }
-            var archivos = await ass.ListAsync(paths.Pending);
+            var archivos = await ass.ListAsync(paths.DeudasPending);
             if (archivos.Count > 0)
             {
                 foreach (string archivo in archivos)
@@ -107,7 +107,7 @@ namespace YP.ZReg.Services.Implementations
                                 contador++;
                                 continue;
                             }
-                            (ResumeErrorRecord resumeErrorRecord, RowTextRecord? record) = ValidateRecord(empresa.Codigo, linea, accion);
+                            (ResumeLoadErrorRecord resumeErrorRecord, RowTextRecord? record) = ValidateRecord(empresa.Codigo, linea, accion);
                             if (resumeErrorRecord.Results.Count > 0) { listaErrores.Add(resumeErrorRecord); continue; }
                             Deuda deuda = dps.mpr.Map<Deuda>(record);
                             deuda.estado = "P";
@@ -159,15 +159,15 @@ namespace YP.ZReg.Services.Implementations
                     string fileNewName = $"{fileSinExtension}_{FechaHoraExec:ddMMyyyyhhmmssfff}";
                     string json = JsonSerializer.Serialize(resumeProcess, new JsonSerializerOptions { WriteIndented = true });
                     //string archivoFinal = $"{paths.Complete}/{fileNewName}";
-                    await ass.UploadJsonAsync($"{paths.Complete}/resume_{fileNewName}.json", json, Encoding.UTF8, default);
-                    await ass.MoveFileAsync(archivo, $"{paths.Complete}/input_{fileNewName}.TXT");
+                    await ass.UploadJsonAsync($"{paths.DeudasComplete}/resume_{fileNewName}.json", json, Encoding.UTF8, default);
+                    await ass.MoveFileAsync(archivo, $"{paths.DeudasComplete}/input_{fileNewName}.TXT");
 
                 }
             }
         }
-        private (ResumeErrorRecord, RowTextRecord?) ValidateRecord(string codigoEmpresa, string linea, string accion)
+        private (ResumeLoadErrorRecord, RowTextRecord?) ValidateRecord(string codigoEmpresa, string linea, string accion)
         {
-            ResumeErrorRecord resume = new() { Row = linea };
+            ResumeLoadErrorRecord resume = new() { Row = linea };
             RowTextRecord? record = null;
             var errors = new List<string>();
             try
@@ -252,7 +252,7 @@ namespace YP.ZReg.Services.Implementations
             }
             return (resume, record);
         }
-        private ResumeProcess SetInitialResumeProcess(string fileName, string fileType) => new()
+        private ResumeLoadProcess SetInitialResumeProcess(string fileName, string fileType) => new()
         {
             FileName = fileName,
             FileType = fileType,
@@ -262,8 +262,7 @@ namespace YP.ZReg.Services.Implementations
             EndExec = DateTime.Now,
             ErrorDetails = []
         };
-
-        private static void SetFinalResumeProcess(ResumeProcess resumeProcess, string total, string errors, List<ResumeErrorRecord> errorsDetail)
+        private static void SetFinalResumeProcess(ResumeLoadProcess resumeProcess, string total, string errors, List<ResumeLoadErrorRecord> errorsDetail)
         {
             resumeProcess.EndExec = DateTime.Now;
             resumeProcess.TotalRecords = total;
@@ -271,17 +270,6 @@ namespace YP.ZReg.Services.Implementations
             resumeProcess.SuccessRecords = (int.Parse(resumeProcess.TotalRecords) - int.Parse(resumeProcess.ErrorRecords)).ToString();
             resumeProcess.ErrorDetails = errorsDetail;
             resumeProcess.Duration = ToolHelper.CalcularDuracion(resumeProcess.StartExec, resumeProcess.EndExec);
-        }
-        private static EmpresaPaths CreateEmpresaPaths(string pathCore, string empresaCodigo)
-        {
-            string root = $"{pathCore}/{empresaCodigo}/Deudas";
-            return new EmpresaPaths
-            {
-                Root = root,
-                Pending = $"{root}/Pending",
-                Complete = $"{root}/Complete",
-                Error = $"{root}/Error"
-            };
         }
     }
 }

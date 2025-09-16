@@ -1,16 +1,13 @@
-﻿using Azure.Core.GeoJson;
-using Microsoft.Data.SqlClient;
+﻿using Microsoft.Data.SqlClient;
 using System.Text;
 using System.Text.Json;
 using YP.ZReg.Dtos.Models;
 using YP.ZReg.Entities.Generic;
 using YP.ZReg.Entities.Model;
-using YP.ZReg.Repositories.Implementations;
 using YP.ZReg.Repositories.Interfaces;
 using YP.ZReg.Services.Interfaces;
 using YP.ZReg.Utils.Helpers;
 using YP.ZReg.Utils.Interfaces;
-using static System.Net.WebRequestMethods;
 
 namespace YP.ZReg.Services.Implementations
 {
@@ -41,9 +38,9 @@ namespace YP.ZReg.Services.Implementations
             };
         }
 
-        private static ResumeProcess CreateInitialResumeProcess()
+        private static ResumeLoadProcess CreateInitialResumeProcess()
         {
-            return new ResumeProcess
+            return new ResumeLoadProcess
             {
                 StartExec = DateTime.Now,
                 FileName = "NoApply",
@@ -51,9 +48,9 @@ namespace YP.ZReg.Services.Implementations
             };
         }
 
-        private static ResumeProcess CreateFileResumeProcess(string fileName)
+        private static ResumeLoadProcess CreateFileResumeProcess(string fileName)
         {
-            return new ResumeProcess
+            return new ResumeLoadProcess
             {
                 StartExec = DateTime.Now,
                 FileName = fileName,
@@ -66,10 +63,10 @@ namespace YP.ZReg.Services.Implementations
             string root = $"{pathCore}/{empresaCodigo}/Deudas";
             return new EmpresaPaths
             {                
-                Root = root,
-                Pending = $"{root}/Pending",
-                Complete = $"{root}/Complete",
-                Error = $"{root}/Error"
+                DeudasRoot = root,
+                DeudasPending = $"{root}/Pending",
+                DeudasComplete = $"{root}/Complete",
+                DeudasError = $"{root}/Error"
             };
         }
         private RowTextRecord ParseLineToRecord(string linea, string empresaCodigo)
@@ -156,13 +153,13 @@ namespace YP.ZReg.Services.Implementations
             }
             return errors;
         }
-        private static void AddError(ResumeProcess result, string linea, string error)
+        private static void AddError(ResumeLoadProcess result, string linea, string error)
         {
             AddError(result, linea, [error]);
         }
-        private static void AddError(ResumeProcess result, string linea, List<string> errors)
+        private static void AddError(ResumeLoadProcess result, string linea, List<string> errors)
         {
-            result.ErrorDetails.Add(new ResumeErrorRecord
+            result.ErrorDetails.Add(new ResumeLoadErrorRecord
             {
                 Row = linea,
                 Results = errors
@@ -196,9 +193,9 @@ namespace YP.ZReg.Services.Implementations
             }
         }
         private static string ExtractAction(string headerLine) => headerLine.Substring(HeaderPosition, 1);
-        public async Task<ResumeProcess> ProcessLines(List<string> lineas, string empresaCodigo, EmpresaCache EmpresaCache)
+        public async Task<ResumeLoadProcess> ProcessLines(List<string> lineas, string empresaCodigo, EmpresaCache EmpresaCache)
         {
-            var result = new ResumeProcess { TotalRecords = (lineas.Count - 1).ToString() };
+            var result = new ResumeLoadProcess { TotalRecords = (lineas.Count - 1).ToString() };
             var accion = ExtractAction(lineas[0]);
             result.FileType = GetFileType(accion);
 
@@ -213,7 +210,7 @@ namespace YP.ZReg.Services.Implementations
             await Task.WhenAll(processingTasks);
             return result;
         }
-        private async Task ProcessLine(string linea, int lineNumber, string accion, string empresaCodigo, ResumeProcess result, EmpresaCache empresasCache)
+        private async Task ProcessLine(string linea, int lineNumber, string accion, string empresaCodigo, ResumeLoadProcess result, EmpresaCache empresasCache)
         {
             if (linea.Trim().Length < MinLineLength)
             {
@@ -253,26 +250,26 @@ namespace YP.ZReg.Services.Implementations
             return empresasCache.empresas?.Any(x => x.id_proveedor.Equals(empresaCodigo)) == true;
         }
 
-        private async Task HandleInvalidEmpresa(EmpresaConfig empresa, string completePath, ResumeProcess resumeProcess)
+        private async Task HandleInvalidEmpresa(EmpresaConfig empresa, string completePath, ResumeLoadProcess resumeProcess)
         {
             resumeProcess.EndExec = DateTime.Now;
             resumeProcess.ErrorRecords = "0";
             resumeProcess.TotalRecords = "0";
 
-            var errorRecord = new ResumeErrorRecord
+            var errorRecord = new ResumeLoadErrorRecord
             {
                 Row = "Generic",
                 Results = ["El código de la carpeta no se asocia a una empresa dentro de la base de datos"]
             };
 
-            resumeProcess.ErrorDetails = new List<ResumeErrorRecord> { errorRecord };
+            resumeProcess.ErrorDetails = new List<ResumeLoadErrorRecord> { errorRecord };
             resumeProcess.SuccessRecords = "0";
             resumeProcess.Duration = ToolHelper.CalcularDuracion(resumeProcess.StartExec, resumeProcess.EndExec);
 
             await SaveProcessingResult(completePath, resumeProcess, $"ERROR:{empresa.Codigo}");
         }
 
-        private static void UpdateResumeProcessWithResults(ResumeProcess resumeProcess, ResumeProcess result)
+        private static void UpdateResumeProcessWithResults(ResumeLoadProcess resumeProcess, ResumeLoadProcess result)
         {
             resumeProcess.EndExec = DateTime.Now;
             resumeProcess.TotalRecords = result.TotalRecords.ToString();
@@ -282,7 +279,7 @@ namespace YP.ZReg.Services.Implementations
             resumeProcess.FileType = result.FileType;
             resumeProcess.Duration = ToolHelper.CalcularDuracion(resumeProcess.StartExec, resumeProcess.EndExec);
         }
-        private async Task MoveProcessedFile(string sourceFile, string targetPath, ResumeProcess resumeProcess)
+        private async Task MoveProcessedFile(string sourceFile, string targetPath, ResumeLoadProcess resumeProcess)
         {
             var fileName = Path.GetFileNameWithoutExtension(resumeProcess.FileName);
             var timestamp = DateTime.Now.ToString("ddMMyyyyHHmmssfff");
@@ -292,7 +289,7 @@ namespace YP.ZReg.Services.Implementations
             await ass.MoveFileAsync(sourceFile, $"{targetPath}/input_{newFileName}.TXT");
         }
 
-        private async Task SaveProcessingResult(string targetPath, ResumeProcess resumeProcess, string fileName)
+        private async Task SaveProcessingResult(string targetPath, ResumeLoadProcess resumeProcess, string fileName)
         {
             var json = JsonSerializer.Serialize(resumeProcess, new JsonSerializerOptions { WriteIndented = true });
             await ass.UploadJsonAsync($"{targetPath}/resume_{fileName}.json", json, Encoding.UTF8, default);
@@ -307,9 +304,9 @@ namespace YP.ZReg.Services.Implementations
         public async Task<BaseResponseExtension> ReadFiles()
         {
             BaseResponseExtension response = new() { CodResp = "00", DesResp = "Ok", Resume = "Ok", StartExec = DateTime.Now };
-            List<ResumeErrorRecord> listaErrores = [];
+            List<ResumeLoadErrorRecord> listaErrores = [];
             List<RowTextRecord> listaValidos = [];
-            ResumeProcess resumeProcess = new();
+            ResumeLoadProcess resumeProcess = new();
             try
             {
                 string PathCore = dps.sft.Root;
@@ -339,7 +336,7 @@ namespace YP.ZReg.Services.Implementations
                                         FileName = Path.GetFileName(archivo),
                                         FileType = "Unkown"
                                     };
-                                    ResumeErrorRecord resume = new();
+                                    ResumeLoadErrorRecord resume = new();
                                     //BaseResponse error = new();
                                     var lineas = await ass.ReadAllLinesAsync(archivo, Encoding.UTF8, default);
                                     resumeProcess.TotalRecords = lineas is null ? "0" : (lineas.Count - 1).ToString();
@@ -514,7 +511,7 @@ namespace YP.ZReg.Services.Implementations
                             resumeProcess.ErrorRecords = "0";
                             resumeProcess.TotalRecords = "0";
                             listaErrores = [];
-                            ResumeErrorRecord resume = new()
+                            ResumeLoadErrorRecord resume = new()
                             {
                                 Row = "Generic",
                                 Results = ["El codigo de la carpeta no se asocia a una empresa dentro de la base de datos"]

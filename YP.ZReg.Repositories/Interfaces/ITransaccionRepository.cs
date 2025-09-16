@@ -6,5 +6,7 @@ namespace YP.ZReg.Repositories.Interfaces
     {
         Task<(long, string)> InsertarPago(Transaccion transaccion);
         Task<(long, string)> AplicarReversa(Transaccion transaccion);
+        Task<List<Transaccion>> ConsultarDeuda(string empresa, string estado, CancellationToken ct = default);
+        Task ActualizarEstadoTransacciones(string empresa, string ids, string estado);
     }
 }

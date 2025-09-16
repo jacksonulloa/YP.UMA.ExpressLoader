@@ -75,10 +75,11 @@ namespace YP.ZReg.Repositories.Implementations
             IEnumerable<SqlParameter>? parametros,
             CancellationToken ct = default) where T : new()
         {
-            string key = "4sb4nc-T1-734m-1ng3r14SW";
-            string cadConex = ToolHelper.DesencriptarString(key, dps.dbc.ConnectionString);
+            //string key = "4sb4nc-T1-734m-1ng3r14SW";
+            //string cadConex = ToolHelper.DesencriptarString(key, dps.dbc.ConnectionString);
 
-            using SqlConnection connection = new(cadConex);
+            //using SqlConnection connection = new(cadConex);
+            using SqlConnection connection = new(dps.dbc.ConnectionString);
             await connection.OpenAsync(ct);
 
             using SqlCommand command = new(storedName, connection)

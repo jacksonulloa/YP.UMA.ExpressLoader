@@ -2,9 +2,10 @@
 {
     public class EmpresaPaths
     {
-        public string Root { get; set; } = string.Empty;
-        public string Pending { get; set; } = string.Empty;
-        public string Complete { get; set; } = string.Empty;
-        public string Error { get; set; } = string.Empty;
+        public string DeudasRoot { get; set; } = string.Empty;
+        public string DeudasPending { get; set; } = string.Empty;
+        public string DeudasComplete { get; set; } = string.Empty;
+        public string DeudasError { get; set; } = string.Empty;
+        public string PagosRoot { get; set; } = string.Empty;
     }
 }

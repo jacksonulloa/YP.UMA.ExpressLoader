@@ -3,14 +3,14 @@ using YP.ZReg.Services.Interfaces;
 
 namespace YP.Loader.app
 {
-    public class FunctionLoader(ICoreService _crs)
+    public class FunctionLoader(ILoaderService _los)
     {
-        private readonly ICoreService crs = _crs;
+        private readonly ILoaderService los = _los;
         [Function("FunctionLoadFile")]
         //public async Task RunLoader([TimerTrigger("0 */1 * * * *")] TimerInfo myTimer)
-        public async Task RunLoader([TimerTrigger("%ReclamosCron%", RunOnStartup = true)] TimerInfo myTimer)
+        public async Task RunLoader([TimerTrigger("%LoaderCron%", RunOnStartup = true)] TimerInfo myTimer)
         {
-            await crs.ReadFilesAsync();
+            await los.ReadFilesAsync();
         }
     }
 }
