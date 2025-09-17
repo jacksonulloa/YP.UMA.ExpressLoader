@@ -1,43 +1,92 @@
-﻿using Microsoft.Azure.Functions.Worker.Http;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Text;
 using YP.ZReg.Entities.Generic;
+using YP.ZReg.Utils.Interfaces;
 
 namespace YP.ZReg.Utils.Helpers
 {
     public static class JwtHelper
     {
-        public static async Task<HttpResponseData?> ConfirmarToken<T>(HttpRequestData req, string secretKey, string localType) where T : BaseResponse, new()
+        
+        public static async Task<HttpResponseData?> ConfirmarToken<T>(HttpRequestData req, string secretKey, 
+            string localType) where T : BaseResponse, new()
         {
-            if (!req.Headers.TryGetValues("Authorization", out var authHeaders))
+            try
             {
-                return await CrearRespuestaError<T>(req, "Token no proporcionado");
+                if (!req.Headers.TryGetValues("Authorization", out var authHeaders))
+                {
+                    return await CrearRespuestaError<T>(req, "Token no proporcionado");
+                }
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(secretKey);
+                string token = authHeaders.FirstOrDefault()?.Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var tipoClaim = jwtToken.Claims.FirstOrDefault(x => x.Type == "tipo")?.Value;
+                if (!string.IsNullOrEmpty(tipoClaim) && tipoClaim != localType)
+                {
+                    HttpResponseData response = await CrearRespuestaError<T>(req, "Claim invalido");
+                    return response;
+                }
+                if (string.IsNullOrWhiteSpace(token) || !JwtHelper.ValidarJwtToken(token, secretKey))
+                {
+                    return await CrearRespuestaError<T>(req, "Token invalido o expirado");
+                }
             }
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(secretKey);
-            string token = authHeaders.FirstOrDefault()?.Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
-            tokenHandler.ValidateToken(token, new TokenValidationParameters
+            catch (Exception ex)
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
-            var jwtToken = (JwtSecurityToken)validatedToken;
-            var tipoClaim = jwtToken.Claims.FirstOrDefault(x => x.Type == "tipo")?.Value;
-            if (!string.IsNullOrEmpty(tipoClaim) && tipoClaim != localType)
-            {
-                return await CrearRespuestaError<T>(req, "Claim invalido");
+                return await CrearRespuestaError<T>(req, "Token invalido");
             }
-
-            if (string.IsNullOrWhiteSpace(token) || !JwtHelper.ValidarJwtToken(token, secretKey))
+            return null; // Token válido
+        }
+        public static TResponse? ConfirmarTokenObjeto<TRequest, TResponse>(HttpRequestData req, string secretKey,
+            string localType) where TResponse : BaseResponse, new()
+        {
+            try
             {
-                return await CrearRespuestaError<T>(req, "Token inválido o expirado");
+                if (!req.Headers.TryGetValues("Authorization", out var authHeaders))
+                {
+                    return CrearRespuestaError<TResponse>("Token no proporcionado");
+                }
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes(secretKey);
+                string token = authHeaders.FirstOrDefault()?.Replace("Bearer ", "", StringComparison.OrdinalIgnoreCase);
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken validatedToken);
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var tipoClaim = jwtToken.Claims.FirstOrDefault(x => x.Type == "tipo")?.Value;
+                if (!string.IsNullOrEmpty(tipoClaim) && tipoClaim != localType)
+                {
+                    TResponse response = CrearRespuestaError<TResponse>("Claim invalido");
+                    return response;
+                }
+                if (string.IsNullOrWhiteSpace(token) || !JwtHelper.ValidarJwtToken(token, secretKey))
+                {
+                    return CrearRespuestaError<TResponse>("Token invalido o expirado");
+                }
             }
-
+            catch (Exception ex)
+            {
+                return CrearRespuestaError<TResponse>("Token invalido");
+            }
             return null; // Token válido
         }
         /// <summary>
@@ -75,6 +124,11 @@ namespace YP.ZReg.Utils.Helpers
             var response = req.CreateResponse(HttpStatusCode.Unauthorized);
             await response.WriteAsJsonAsync(res);
             return response;
-        }        
+        }
+        private static TResponse CrearRespuestaError<TResponse>(string mensaje) where TResponse : BaseResponse, new()
+        {
+            var response = new TResponse { CodResp = "99", DesResp = mensaje };
+            return response;
+        }
     }
 }

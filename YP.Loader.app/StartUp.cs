@@ -23,6 +23,8 @@ namespace YP.Loader.app
                 .BindConfiguration("DbConf");
             services.AddOptions<JwtConfig>()
                 .BindConfiguration("JwtConfig");
+            services.AddOptions<BlobConfig>()
+                .BindConfiguration("BlobConfig");
             ConfigRepositories(services);
             ConfigBusinessServices(services);
             ConfigAutoMapper(services);
@@ -81,6 +83,7 @@ namespace YP.Loader.app
         public static void ConfigUtilities(IServiceCollection ListUtilities)
         {
             ListUtilities.AddSingleton<IDependencyProviderService, DependencyProviderService>();
+            ListUtilities.AddTransient<IBlobLogService, BlobLogService>();
             //ListUtilities.AddTransient<IToolsService, ToolsService>();
             //ListUtilities.AddSingleton<IAzureLogService, AzureLogService>();
             //ListUtilities.AddHttpClient<IExecApiService, ExecApiService>();

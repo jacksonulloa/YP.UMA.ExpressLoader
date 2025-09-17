@@ -26,6 +26,12 @@ namespace YP.ZReg.Utils.Helpers
             double segundosTotales = (duracion.TotalMilliseconds) / 1000;
             return $"{segundosTotales:F5} seg";
         }
+        public static double CalcularDuracionSeconds(DateTime fechaIni, DateTime fechaFin)
+        {
+            TimeSpan duracion = fechaFin - fechaIni;
+            double segundosTotales = (duracion.TotalMilliseconds) / 1000;
+            return segundosTotales;
+        }
         public static string EncriptarString(string key, string texto)
         {
             byte[] iv = new byte[16];

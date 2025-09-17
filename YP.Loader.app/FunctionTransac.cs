@@ -6,6 +6,7 @@ using Microsoft.OpenApi.Models;
 using System.Net;
 using YP.ZReg.Dtos.Contracts.Request;
 using YP.ZReg.Dtos.Contracts.Response;
+using YP.ZReg.Entities.Generic;
 using YP.ZReg.Services.Interfaces;
 using YP.ZReg.Utils.Extensions;
 using YP.ZReg.Utils.Helpers;
@@ -34,7 +35,7 @@ namespace YP.Loader.app
         }
 
         [Function("Consultar")]
-        [OpenApiOperation(operationId: "Consultar", tags: new[] { "DataInfo" })]
+        [OpenApiOperation(operationId: "Consultar", tags: ["DataInfo"])]
         [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, In = OpenApiSecurityLocationType.Header, Name = "Authorization")]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(GetDebtsReq), Required = true)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(GetDebtsRes), Description = "Procesamiento correcto")]
@@ -53,7 +54,7 @@ namespace YP.Loader.app
         }
 
         [Function("Pagar")]
-        [OpenApiOperation(operationId: "Pagar", tags: new[] { "DataInfo" })]
+        [OpenApiOperation(operationId: "Pagar", tags: ["DataInfo"])]
         [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, In = OpenApiSecurityLocationType.Header, Name = "Authorization")]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(ExecPaymentReq), Required = true)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(ExecPaymentRes), Description = "Procesamiento correcto")]
@@ -63,16 +64,31 @@ namespace YP.Loader.app
         [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "V1.0/transac/pagar")] HttpRequestData req,
         FunctionContext context)
         {
-            var tokenCheckResult = await JwtHelper.ConfirmarToken<ExecPaymentRes>(req, dps.jwc.SecretKey, dps.jwc.Claim);
-            if (tokenCheckResult is not null)
-                return tokenCheckResult;
             ExecPaymentReq requestApi = await req.ToJsonRequest<ExecPaymentReq>();
+            BlobTableRecord record = new() { Empresa = requestApi.idEmpresa };
+            DateTime start = ToolHelper.GetActualPeruHour();
+            var tokenCheckResult = JwtHelper.ConfirmarTokenObjeto<ExecPaymentReq, ExecPaymentRes>(req, dps.jwc.SecretKey, dps.jwc.Claim);
+            DateTime end = ToolHelper.GetActualPeruHour();
+            if (tokenCheckResult is not null && tokenCheckResult.CodResp.Equals("99"))
+            {
+                record = dps.mpr.Map<BlobTableRecord>(tokenCheckResult);
+                record.FechaHoraInicio = start;
+                record.FechaHoraFin = end;
+                record.Proceso = "Transac";
+                dps.bls.RegistrarLogAsync<ExecPaymentReq, ExecPaymentRes>(
+                    record,
+                    requestApi,
+                    tokenCheckResult,
+                    HttpStatusCode.Accepted, "Error").FireAndForget();
+                return await req.ToJsonResponse(tokenCheckResult, HttpStatusCode.Accepted);
+            }
+
             var (responseApi, statusCode) = await ats.ExecPaymentAsync(requestApi);
             return await req.ToJsonResponse(responseApi, statusCode);
         }
 
         [Function("Revertir")]
-        [OpenApiOperation(operationId: "Revertir", tags: new[] { "DataInfo" })]
+        [OpenApiOperation(operationId: "Revertir", tags: ["DataInfo"])]
         [OpenApiSecurity("Bearer", SecuritySchemeType.ApiKey, In = OpenApiSecurityLocationType.Header, Name = "Authorization")]
         [OpenApiRequestBody(contentType: "application/json", bodyType: typeof(ExecReverseReq), Required = true)]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(ExecReverseRes), Description = "Procesamiento correcto")]

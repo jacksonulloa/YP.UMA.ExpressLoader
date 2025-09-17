@@ -82,7 +82,18 @@ namespace YP.ZReg.Services.Profiles
                 .ForMember(d => d.numero_operacion, opt => opt.MapFrom(s => s.numeroOperacion))
                 .ForMember(d => d.numero_documento, opt => opt.MapFrom(s => s.numeroDocumento))
                 .ForMember(d => d.id_empresa, opt => opt.MapFrom(s => s.idEmpresa))
-                .ForMember(d => d.voucher, opt => opt.MapFrom(s => s.voucher));                
+                .ForMember(d => d.voucher, opt => opt.MapFrom(s => s.voucher));
+            CreateMap<BaseResponseExtension, BlobTableRecord>()
+                .ForMember(dest => dest.CodResp, opt => opt.MapFrom(src => src.CodResp))
+                .ForMember(dest => dest.DescResp, opt => opt.MapFrom(src => src.DesResp))
+                .ForMember(dest => dest.FechaHoraInicio, opt => opt.MapFrom(src => src.StartExec))
+                .ForMember(dest => dest.FechaHoraFin, opt => opt.MapFrom(src => src.EndExec));
+            CreateMap<BaseResponse, BlobTableRecord>()
+                .ForMember(dest => dest.CodResp, opt => opt.MapFrom(src => src.CodResp))
+                .ForMember(dest => dest.DescResp, opt => opt.MapFrom(src => src.DesResp));
+            CreateMap<BaseResponse, BaseResponseExtension>()
+                .ForMember(dest => dest.CodResp, opt => opt.MapFrom(src => src.CodResp))
+                .ForMember(dest => dest.DesResp, opt => opt.MapFrom(src => src.DesResp));
         }
     }
 }

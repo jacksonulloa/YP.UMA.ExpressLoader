@@ -50,6 +50,16 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Azure.Core": {
+              "target": "Package",
+              "version": "[1.47.1, )"
+            },
+            "Azure.Data.Tables": {
+              "target": "Package",
+              "version": "[12.11.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

@@ -9,6 +9,8 @@ namespace YP.ZReg.Utils.Interfaces
         DBConfig dbc { get; }
         SftpConfig sft { get; }
         JwtConfig jwc { get; }
+        BlobConfig blc { get; }
         IMapper mpr { get; }
+        IBlobLogService bls { get; }
     }
 }

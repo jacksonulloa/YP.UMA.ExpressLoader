@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Azure.Core" Version="1.47.1" />
+    <PackageReference Include="Azure.Data.Tables" Version="12.11.0" />
+  </ItemGroup>
+
 </Project>
