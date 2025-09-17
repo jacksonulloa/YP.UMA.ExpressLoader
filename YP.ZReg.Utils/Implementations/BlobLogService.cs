@@ -37,7 +37,7 @@ namespace YP.ZReg.Utils.Implementations
             register.PartitionKey = $"{register.FechaHoraLog:yyyyMMdd}";
             Azure.Response responseReg = await tableClient.AddEntityAsync(register);
         }
-        public async Task RegistrarLogAsync<TRequest, TResponse>(BlobTableRecord record, TRequest request, TResponse? response, HttpStatusCode statusCode, string nivel)
+        public async Task RegistrarLogAsync<TRequest, TResponse>(BlobTableRecord record, TRequest request, TResponse? response, HttpStatusCode statusCode)
         {
             if (!blc.EnableLog.Equals("On")) return;
             var log = mpr.Map<BlobTableRecord>(record);
@@ -46,7 +46,7 @@ namespace YP.ZReg.Utils.Implementations
             log.Request = request is null ? "" : JsonConvert.SerializeObject(request);
             log.Response = response is null ? "" : JsonConvert.SerializeObject(response);
             log.HttpStatus = statusCode.ToString();
-            log.Nivel = nivel;
+            log.Nivel = record.Nivel;
             log.Duracion = ToolHelper.CalcularDuracionSeconds(log.FechaHoraInicio, log.FechaHoraFin);
             await EnviarLogAzure(log);
         }

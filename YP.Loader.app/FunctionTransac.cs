@@ -6,7 +6,6 @@ using Microsoft.OpenApi.Models;
 using System.Net;
 using YP.ZReg.Dtos.Contracts.Request;
 using YP.ZReg.Dtos.Contracts.Response;
-using YP.ZReg.Entities.Generic;
 using YP.ZReg.Services.Interfaces;
 using YP.ZReg.Utils.Extensions;
 using YP.ZReg.Utils.Helpers;
@@ -42,15 +41,25 @@ namespace YP.Loader.app
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.Unauthorized, contentType: "application/json", bodyType: typeof(GetDebtsRes), Description = "Problemas de autenticacion")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "application/json", bodyType: typeof(GetDebtsRes), Description = "Problemas en backend al invocar endpoint")]
         public async Task<HttpResponseData> Consultar(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "V1.0/transac/consultar")] HttpRequestData req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "V1.0/transac/consultar")] HttpRequestData httpReq,
         FunctionContext context)
         {
-            var tokenCheckResult = await JwtHelper.ConfirmarToken<GetDebtsRes>(req, dps.jwc.SecretKey, dps.jwc.Claim);
-            if (tokenCheckResult is not null)
-                return tokenCheckResult;
-            GetDebtsReq requestApi = await req.ToJsonRequest<GetDebtsReq>();
+            GetDebtsReq requestApi = await httpReq.ToJsonRequest<GetDebtsReq>();
+            DateTime start = ToolHelper.GetActualPeruHour();
+            var authResponse = await TaskExtension.ValidarTokenAsync<GetDebtsReq, GetDebtsRes>(dps,
+                httpReq, requestApi, start, "Consulta", requestApi.empresa, HttpStatusCode.Accepted);
+            if (authResponse != null) return authResponse;
             var (responseApi, statusCode) = await ats.GetDebtsAsync(requestApi);
-            return await req.ToJsonResponse(responseApi, statusCode);
+            return await TaskExtension.ProcesarResultadoAsync<GetDebtsReq, GetDebtsRes>(
+                                dps,
+                                httpReq,
+                                requestApi,
+                                responseApi,
+                                "Consulta",
+                                start,
+                                requestApi.empresa,
+                                "Info",
+                                HttpStatusCode.Accepted);
         }
 
         [Function("Pagar")]
@@ -61,30 +70,25 @@ namespace YP.Loader.app
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.Unauthorized, contentType: "application/json", bodyType: typeof(ExecPaymentRes), Description = "Problemas de autenticacion")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "application/json", bodyType: typeof(ExecPaymentRes), Description = "Problemas en backend al invocar endpoint")]
         public async Task<HttpResponseData> Pagar(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "V1.0/transac/pagar")] HttpRequestData req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "V1.0/transac/pagar")] HttpRequestData httpReq,
         FunctionContext context)
         {
-            ExecPaymentReq requestApi = await req.ToJsonRequest<ExecPaymentReq>();
-            BlobTableRecord record = new() { Empresa = requestApi.idEmpresa };
+            ExecPaymentReq requestApi = await httpReq.ToJsonRequest<ExecPaymentReq>();
             DateTime start = ToolHelper.GetActualPeruHour();
-            var tokenCheckResult = JwtHelper.ConfirmarTokenObjeto<ExecPaymentReq, ExecPaymentRes>(req, dps.jwc.SecretKey, dps.jwc.Claim);
-            DateTime end = ToolHelper.GetActualPeruHour();
-            if (tokenCheckResult is not null && tokenCheckResult.CodResp.Equals("99"))
-            {
-                record = dps.mpr.Map<BlobTableRecord>(tokenCheckResult);
-                record.FechaHoraInicio = start;
-                record.FechaHoraFin = end;
-                record.Proceso = "Transac";
-                dps.bls.RegistrarLogAsync<ExecPaymentReq, ExecPaymentRes>(
-                    record,
-                    requestApi,
-                    tokenCheckResult,
-                    HttpStatusCode.Accepted, "Error").FireAndForget();
-                return await req.ToJsonResponse(tokenCheckResult, HttpStatusCode.Accepted);
-            }
-
+            var authResponse = await TaskExtension.ValidarTokenAsync<ExecPaymentReq, ExecPaymentRes>(dps,
+                httpReq, requestApi, start, "Pago", requestApi.idEmpresa, HttpStatusCode.Accepted);
+            if (authResponse != null) return authResponse;
             var (responseApi, statusCode) = await ats.ExecPaymentAsync(requestApi);
-            return await req.ToJsonResponse(responseApi, statusCode);
+            return await TaskExtension.ProcesarResultadoAsync<ExecPaymentReq, ExecPaymentRes>(
+                                dps,
+                                httpReq,
+                                requestApi,
+                                responseApi,
+                                "Pago",
+                                start,
+                                requestApi.idEmpresa,
+                                "Info",
+                                HttpStatusCode.Accepted);
         }
 
         [Function("Revertir")]
@@ -95,15 +99,25 @@ namespace YP.Loader.app
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.Unauthorized, contentType: "application/json", bodyType: typeof(ExecReverseRes), Description = "Problemas de autenticacion")]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.InternalServerError, contentType: "application/json", bodyType: typeof(ExecReverseRes), Description = "Problemas en backend al invocar endpoint")]
         public async Task<HttpResponseData> Revertir(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "V1.0/transac/revertir")] HttpRequestData req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "V1.0/transac/revertir")] HttpRequestData httpReq,
         FunctionContext context)
         {
-            var tokenCheckResult = await JwtHelper.ConfirmarToken<ExecReverseRes>(req, dps.jwc.SecretKey, dps.jwc.Claim);
-            if (tokenCheckResult is not null)
-                return tokenCheckResult;
-            ExecReverseReq requestApi = await req.ToJsonRequest<ExecReverseReq>();
+            ExecReverseReq requestApi = await httpReq.ToJsonRequest<ExecReverseReq>();
+            DateTime start = ToolHelper.GetActualPeruHour();
+            var authResponse = await TaskExtension.ValidarTokenAsync<ExecReverseReq, ExecReverseRes>(dps, 
+                httpReq, requestApi, start, "Reversa", requestApi.idEmpresa, HttpStatusCode.Accepted);
+            if (authResponse != null) return authResponse;
             var (responseApi, statusCode) = await ats.ExecReverseAsync(requestApi);
-            return await req.ToJsonResponse(responseApi, statusCode);
+            return await TaskExtension.ProcesarResultadoAsync<ExecReverseReq, ExecReverseRes>(
+                                dps,
+                                httpReq,
+                                requestApi,
+                                responseApi,
+                                "Reversa",
+                                start,
+                                requestApi.idEmpresa,
+                                "Info",
+                                HttpStatusCode.Accepted);
         }
     }
 }

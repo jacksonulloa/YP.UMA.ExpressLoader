@@ -5,6 +5,6 @@ namespace YP.ZReg.Utils.Interfaces
 {
     public interface IBlobLogService
     {
-        Task RegistrarLogAsync<TRequest, TResponse>(BlobTableRecord record, TRequest request, TResponse? response, HttpStatusCode statusCode, string nivel);
+        Task RegistrarLogAsync<TRequest, TResponse>(BlobTableRecord record, TRequest request, TResponse? response, HttpStatusCode statusCode);
     }
 }
