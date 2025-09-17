@@ -2,6 +2,7 @@
 using System.Globalization;
 using YP.ZReg.Dtos.Contracts.Request;
 using YP.ZReg.Dtos.Contracts.Response;
+using YP.ZReg.Dtos.Models;
 using YP.ZReg.Entities.Generic;
 using YP.ZReg.Entities.Model;
 using YP.ZReg.Utils.Helpers;
@@ -94,6 +95,12 @@ namespace YP.ZReg.Services.Profiles
             CreateMap<BaseResponse, BaseResponseExtension>()
                 .ForMember(dest => dest.CodResp, opt => opt.MapFrom(src => src.CodResp))
                 .ForMember(dest => dest.DesResp, opt => opt.MapFrom(src => src.DesResp));
+            CreateMap<ResumeLoadProcess, ResumeCompactLoadProcess>();
+            CreateMap<ResumeGeneratorProcess, BlobTableRecord>()
+                .ForMember(dest => dest.Empresa, opt => opt.MapFrom(src => src.idEmpresa))
+                .ForMember(dest => dest.DescResp, opt => opt.MapFrom(src => src.description))
+                .ForMember(dest => dest.FechaHoraInicio, opt => opt.MapFrom(src => src.inicio))
+                .ForMember(dest => dest.FechaHoraFin, opt => opt.MapFrom(src => src.fin));
         }
     }
 }

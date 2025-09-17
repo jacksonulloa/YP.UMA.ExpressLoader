@@ -89,6 +89,35 @@ namespace YP.ZReg.Utils.Extensions
                 statusCode).FireAndForget();
             return await req.ToJsonResponse(response, statusCode);
         }
+        public static async Task ProcesarResultadoAsync<TRequest, TResponse>(
+            IDependencyProviderService dps,
+            TRequest request,
+            TResponse response,
+            string proceso,
+            DateTime inicio,
+            string empresa,
+            string nivel,
+            string codResp,
+            string desResp,
+            HttpStatusCode statusCode)
+        {
+            DateTime fin = ToolHelper.GetActualPeruHour();
+            BlobTableRecord record = new()
+            {
+                Empresa = empresa,
+                Proceso = proceso,
+                FechaHoraInicio = inicio,
+                FechaHoraFin = fin,
+                Nivel = nivel,
+                CodResp = codResp,
+                DescResp = desResp
+            };
+            dps.bls.RegistrarLogAsync<TRequest, TResponse>(
+                record,
+                request,
+                response,
+                statusCode).FireAndForget();
+        }
         public static async Task<HttpResponseData?> ValidarTokenAsync<TRequest, TResponse>(
             IDependencyProviderService dps,
             HttpRequestData httpReq,
@@ -116,5 +145,6 @@ namespace YP.ZReg.Utils.Extensions
             }
             return null;
         }
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Concurrent;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using YP.ZReg.Dtos.Models;
@@ -6,6 +7,7 @@ using YP.ZReg.Entities.Generic;
 using YP.ZReg.Entities.Model;
 using YP.ZReg.Repositories.Interfaces;
 using YP.ZReg.Services.Interfaces;
+using YP.ZReg.Utils.Extensions;
 using YP.ZReg.Utils.Helpers;
 using YP.ZReg.Utils.Interfaces;
 
@@ -58,7 +60,8 @@ namespace YP.ZReg.Services.Implementations
         }
         private async Task<ResumeGeneratorProcess?> ProcesarEmpresaAsync(EmpresaConfig empresa)
         {
-            ResumeGeneratorProcess? resumen = new() { idEmpresa = empresa.Codigo, description = "Ok" };
+            ResumeGeneratorProcess? resumen = new() { idEmpresa = empresa.Codigo, description = "Ok",
+            inicio = ToolHelper.GetActualPeruHour() };
             List<ResumeLoadErrorRecord> listaErrores = [];
             List<Transaccion> transacciones = await trr.ConsultarDeuda(empresa.Codigo, "P");
             if (transacciones.Count == 0) return null;
@@ -75,12 +78,19 @@ namespace YP.ZReg.Services.Implementations
                 resumen = new() { idEmpresa = empresa.Codigo, errorRecordIds = transacciones.Select(x => x.id).ToList(), okRecordIds = [], description = $"Error => {ex.Message}" };
                 jsonResumen = JsonSerializer.Serialize(resumen, new JsonSerializerOptions { WriteIndented = true });
                 await ass.UploadJsonAsync($"{paths.PagosRoot}/{resumeFileName}", jsonResumen, Encoding.UTF8, default);
+                resumen.fin = ToolHelper.GetActualPeruHour();
+                TaskExtension.ProcesarResultadoAsync<object, ResumeGeneratorProcess>(dps,
+                    null, resumen, "Generador", resumen.inicio, empresa.Codigo, "Info",
+                    "99", resumen.description, HttpStatusCode.Accepted).FireAndForget();
                 return resumen;
             }
             (resumen.okRecordIds, resumen.errorRecordIds) = await ass.WriteAllLinesAsync($"{paths.PagosRoot}/{fileName}", transacciones, Encoding.UTF8, default);
             jsonResumen = JsonSerializer.Serialize(resumen, new JsonSerializerOptions { WriteIndented = true });
             await ass.UploadJsonAsync($"{paths.PagosRoot}/{resumeFileName}", jsonResumen, Encoding.UTF8, default);
-            if (resumen.okRecordIds.Count > 0) await trr.ActualizarEstadoTransacciones(empresa.Codigo, string.Join(',', resumen.okRecordIds), "C");            
+            if (resumen.okRecordIds.Count > 0) await trr.ActualizarEstadoTransacciones(empresa.Codigo, string.Join(',', resumen.okRecordIds), "C");
+            TaskExtension.ProcesarResultadoAsync<object, ResumeGeneratorProcess>(dps,
+                    null, resumen, "Generador", resumen.inicio, empresa.Codigo, "Info",
+                    "00", "Ok", HttpStatusCode.Accepted).FireAndForget();
             return resumen;
         }
     }

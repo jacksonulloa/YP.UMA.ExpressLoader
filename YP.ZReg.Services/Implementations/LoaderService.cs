@@ -1,12 +1,16 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Collections.Concurrent;
+using System.Net;
 using System.Text;
 using System.Text.Json;
+using YP.ZReg.Dtos.Contracts.Request;
+using YP.ZReg.Dtos.Contracts.Response;
 using YP.ZReg.Dtos.Models;
 using YP.ZReg.Entities.Generic;
 using YP.ZReg.Entities.Model;
 using YP.ZReg.Repositories.Interfaces;
 using YP.ZReg.Services.Interfaces;
+using YP.ZReg.Utils.Extensions;
 using YP.ZReg.Utils.Helpers;
 using YP.ZReg.Utils.Interfaces;
 
@@ -155,15 +159,18 @@ namespace YP.ZReg.Services.Implementations
                     }
                     SetFinalResumeProcess(resumeProcess, resumeProcess.TotalRecords, listaErrores.Count.ToString(), listaErrores);
                     string fileSinExtension = Path.GetFileNameWithoutExtension(resumeProcess.FileName);
-                    DateTime FechaHoraExec = DateTime.Now;
+                    DateTime FechaHoraExec = ToolHelper.GetActualPeruHour();
                     string fileNewName = $"{fileSinExtension}_{FechaHoraExec:ddMMyyyyhhmmssfff}";
                     string json = JsonSerializer.Serialize(resumeProcess, new JsonSerializerOptions { WriteIndented = true });
                     //string archivoFinal = $"{paths.Complete}/{fileNewName}";
                     await ass.UploadJsonAsync($"{paths.DeudasComplete}/resume_{fileNewName}.json", json, Encoding.UTF8, default);
                     await ass.MoveFileAsync(archivo, $"{paths.DeudasComplete}/input_{fileNewName}.TXT");
-
                 }
-            }
+                ResumeCompactLoadProcess resumeCompactLoadProcess = dps.mpr.Map<ResumeCompactLoadProcess>(resumeProcess);
+                TaskExtension.ProcesarResultadoAsync<object, ResumeCompactLoadProcess>(dps,
+                    null, resumeCompactLoadProcess, "Carga", resumeCompactLoadProcess.StartExec, empresa.Codigo, "Info",
+                    "00", "Ok", HttpStatusCode.Accepted).FireAndForget();
+            }            
         }
         private (ResumeLoadErrorRecord, RowTextRecord?) ValidateRecord(string codigoEmpresa, string linea, string accion)
         {
@@ -258,13 +265,13 @@ namespace YP.ZReg.Services.Implementations
             FileType = fileType,
             TotalRecords = "0",
             ErrorRecords = "0",
-            StartExec = DateTime.Now,
-            EndExec = DateTime.Now,
+            StartExec = ToolHelper.GetActualPeruHour(),
+            EndExec = ToolHelper.GetActualPeruHour(),
             ErrorDetails = []
         };
         private static void SetFinalResumeProcess(ResumeLoadProcess resumeProcess, string total, string errors, List<ResumeLoadErrorRecord> errorsDetail)
         {
-            resumeProcess.EndExec = DateTime.Now;
+            resumeProcess.EndExec = ToolHelper.GetActualPeruHour();
             resumeProcess.TotalRecords = total;
             resumeProcess.ErrorRecords = errors;
             resumeProcess.SuccessRecords = (int.Parse(resumeProcess.TotalRecords) - int.Parse(resumeProcess.ErrorRecords)).ToString();
