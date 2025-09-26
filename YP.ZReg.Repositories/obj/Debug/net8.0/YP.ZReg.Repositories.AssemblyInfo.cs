@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YP.ZReg.Repositories")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7372a08ea2535f42856ba2e6ddb4fa99a1c42e6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+763ae45c55fa9fc16a203972cb688fd3527d9684")]
 [assembly: System.Reflection.AssemblyProductAttribute("YP.ZReg.Repositories")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YP.ZReg.Repositories")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

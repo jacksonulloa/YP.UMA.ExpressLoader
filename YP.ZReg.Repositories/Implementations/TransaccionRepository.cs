@@ -18,6 +18,7 @@ namespace YP.ZReg.Repositories.Implementations
                 var paramIdTransaccion = bre.SetParameter("@p_id_transaccion", SqlDbType.BigInt, null, direction: ParameterDirection.Output);
                 var paramNombreCliente = bre.SetParameter("@p_nombre_cliente", SqlDbType.VarChar, null, size: 30, direction: ParameterDirection.Output);
                 List<SqlParameter> parameters = [
+                    new(){ ParameterName = "@p_tipo_validacion", DbType = DbType.String , Value = transaccion.tipo_validacion},
                     new(){ ParameterName = "@p_fecha_hora_transaccion", DbType = DbType.DateTime , Value = transaccion.fecha_hora_transaccion},
                     new(){ ParameterName = "@p_id_canal_pago", DbType = DbType.String , Value = transaccion.id_canal_pago},
                     new(){ ParameterName = "@p_id_forma_pago", DbType = DbType.String , Value = transaccion.id_forma_pago},
@@ -94,7 +95,7 @@ namespace YP.ZReg.Repositories.Implementations
                 response = await bre.EjecutarConsultaSpAsync<Transaccion>(
                                     "[Transac].[Usp_Listar_Transacciones_Por_Empresa_Estado]",
                                     parametros, ct);
-                            
+
             }
             catch
             {

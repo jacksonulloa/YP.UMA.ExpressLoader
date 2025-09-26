@@ -15,6 +15,10 @@
         public string id_empresa { get; set; } = string.Empty;
         public long id_deuda { get; set; }
         /// <summary>
+        /// C:Completa | P:Parcial
+        /// </summary>
+        public string tipo_validacion { get; set; } = string.Empty;
+        /// <summary>
         /// P: Pay | R: Reverse
         /// </summary>
         public string tipo_transac { get; set; } = string.Empty;

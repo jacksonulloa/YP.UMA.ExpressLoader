@@ -12,11 +12,12 @@ using YP.ZReg.Utils.Interfaces;
 namespace YP.ZReg.Services.Implementations
 {
     public class ApiTransacService(IDependencyProviderService _dps, IDeudaRepository _der,
-        ITransaccionRepository _trr) : IApiTransacService
+        ITransaccionRepository _trr, IEmpresaCache _emc) : IApiTransacService
     {
         public readonly IDependencyProviderService dps = _dps;
         public IDeudaRepository der = _der;
         public ITransaccionRepository trr = _trr;
+        public IEmpresaCache emc = _emc;
         public async Task<(GetDebtsRes, HttpStatusCode)> GetDebtsAsync(GetDebtsReq request)
         {
             BaseResponseExtension responseBase = new() { CodResp = "00", DesResp = "Conforme" };
@@ -56,10 +57,42 @@ namespace YP.ZReg.Services.Implementations
             long id = 0;
             try
             {
-                Transaccion transaccion = dps.mpr.Map<Transaccion>(request);
-                transaccion.tipo_transac = "P";
-                transaccion.estado_notificacion = "P";
-                (id, cliente) = await trr.InsertarPago(transaccion);
+                Empresa? empresa = emc.empresas.FirstOrDefault(x => x.id_proveedor == request.idEmpresa);
+                Servicio? servicio = null;
+                if (empresa is null)
+                {
+                    ToolHelper.SetResponse(responseBase, "99", "No se encontró empresa");
+                }
+                else if ((servicio = empresa.servicios?.FirstOrDefault(x => x.codigo == request.servicio)) is null)
+                {
+                    ToolHelper.SetResponse(responseBase, "99", "No se encontró servicio");
+                }
+                else
+                {
+                    var transaccion = dps.mpr.Map<Transaccion>(request);
+                    transaccion.tipo_transac = "P";
+                    transaccion.estado_notificacion = "P";
+                    transaccion.tipo_validacion = servicio.tipo_validacion;
+                    (id, cliente) = await trr.InsertarPago(transaccion);
+                }
+                //if (empresa is null)
+                //    ToolHelper.SetResponse(responseBase, "99", "No se encontro empresa");                
+                //if (responseBase.CodResp.Equals("00"))
+                //{
+                //    servicio = empresa.servicios.FirstOrDefault(x=> x.codigo.Equals(request.servicio));
+                //    if(servicio is null)
+                //    {
+                //        ToolHelper.SetResponse(responseBase, "99", "No se encontro servicio");
+                //    }
+                //}
+                //if(responseBase.CodResp.Equals("00"))
+                //{
+                //    Transaccion transaccion = dps.mpr.Map<Transaccion>(request);
+                //    transaccion.tipo_transac = "P";
+                //    transaccion.estado_notificacion = "P";
+                //    transaccion.tipo_validacion = servicio.tipo_validacion;
+                //    (id, cliente) = await trr.InsertarPago(transaccion);
+                //}                
             }
             catch (Exception ex)
             {
