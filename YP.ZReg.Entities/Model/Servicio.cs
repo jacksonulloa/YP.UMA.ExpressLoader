@@ -10,5 +10,6 @@
         public string tipo_validacion { get; set; } = string.Empty;
         public string tipo_pago { get; set; } = string.Empty;
         public int estado { get; set; }
+        public string numero_cuenta { get; set; } = string.Empty;
     }
 }

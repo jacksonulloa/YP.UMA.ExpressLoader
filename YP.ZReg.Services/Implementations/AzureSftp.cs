@@ -149,10 +149,13 @@ namespace YP.ZReg.Services.Implementations
             sb.Append((t.id_forma_pago ?? "").PadRight(2));
             // 15 Fecha contable (no la tienes, usamos la misma fecha) DDMMAAAA
             sb.Append(t.fecha_hora_transaccion.ToString("ddMMyyyy"));
+            // 16 Tipo transaccion
+            sb.Append(t.tipo_transac == "P" ? "P" : "A");
             // 16 Banco (libre) 30 chars
             sb.Append((t.id_banco ?? "").PadRight(4));
             sb.Append((t.cuenta_banco ?? "").PadRight(20));
             sb.Append((t.voucher ?? "").PadRight(20));
+            sb.Append(new string(' ', 30));
             return sb.ToString();
         }
 

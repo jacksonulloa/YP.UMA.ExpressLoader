@@ -98,3 +98,31 @@ BEGIN
         RAISERROR(@ErrorMessage, 16, 1);  
     END CATCH  
 END  
+
+GO
+
+IF NOT EXISTS (
+    SELECT 1
+    FROM sys.columns 
+    WHERE Name = N'numero_cuenta'
+      AND Object_ID = Object_ID(N'Profile.Tbl_Servicio')
+)
+BEGIN
+    ALTER TABLE [Profile].[Tbl_Servicio]
+    ADD [numero_cuenta] VARCHAR(50) NULL;
+END
+
+GO
+
+ALTER   PROCEDURE [Profile].[Usp_Listar_Empresas_Por_Empresa_Estado]
+@id_empresa int,
+@emp_estado int
+AS
+SET NOCOUNT ON;
+SELECT E.id as id_empresa, E.id_proveedor, E.nombre as nombre_empresa, E.ruc, E.estado as estado_empresa, 
+	S.id as id_servicio, S.codigo, S.moneda, S.nombre as nombre_servicio, S.tipo_validacion, S.tipo_pago, S.estado as estado_servicio, S.numero_cuenta as numero_cuenta
+FROM [Profile].Tbl_Empresa E
+INNER JOIN [Profile].Tbl_Servicio S
+ON E.id = S.id_empresa
+WHERE (@id_empresa = -1 OR E.id = @id_empresa)
+AND (@emp_estado = -1 OR E.estado = @emp_estado)

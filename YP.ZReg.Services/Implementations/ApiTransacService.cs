@@ -73,6 +73,7 @@ namespace YP.ZReg.Services.Implementations
                     transaccion.tipo_transac = "P";
                     transaccion.estado_notificacion = "P";
                     transaccion.tipo_validacion = servicio.tipo_validacion;
+                    transaccion.cuenta_banco = servicio.numero_cuenta;
                     (id, cliente) = await trr.InsertarPago(transaccion);
                 }
                 //if (empresa is null)

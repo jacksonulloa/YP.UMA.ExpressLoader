@@ -39,7 +39,8 @@ namespace YP.ZReg.Repositories.Implementations
                     moneda = r.GetInt32(r.GetOrdinal("moneda")),
                     tipo_validacion = r.GetString(r.GetOrdinal("tipo_validacion")),
                     tipo_pago = r.GetString(r.GetOrdinal("tipo_pago")),
-                    estado = r.GetInt32(r.GetOrdinal("estado_servicio"))
+                    estado = r.GetInt32(r.GetOrdinal("estado_servicio")),
+                    numero_cuenta = r.GetString(r.GetOrdinal("numero_cuenta"))
                 },
                 // childCollection
                 e => e.servicios,
