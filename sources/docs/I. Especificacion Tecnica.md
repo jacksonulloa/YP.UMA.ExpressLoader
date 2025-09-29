@@ -9,6 +9,7 @@ Solución que permite a las empresas cargar información sobre deudas pendientes
 - La carga de información se realiza mediante un archivo cuyo formato es definido por ASBANC.
 - Los pagos se reportan mediante un archivo cuyo formato es definido por ASBANC.
 - La empresa debe disponer de cuentas de recaudación asociadas a cada servicio en cada banco con el que desee operar.
+- La solución está compuesta por **3 funciones**, las cuales se despliegan de manera conjunta al publicar el componente en **Azure**. Esto se debe a que, por la propia naturaleza de un servicio **Azure Function**, no es posible realizar una publicación parcial.  
 
 # 3. Componentes de la solución
 
@@ -21,71 +22,51 @@ Solución que permite a las empresas cargar información sobre deudas pendientes
 
 ---
 
-# 4. Consideraciones generales
+# 4. Proceso transaccional
 
-Deben tenerse en consideración lo siguiente:
+## 4.1. Definición
 
-- El parámetro **`idDeuda`** que se encuentra dentro de cada uno de los objetos del array `deudas` del **response del método de consulta**, debe reenviarse en cada request en el parámetro **`referenciaDeuda`** de cada request de pago asociado a cada objeto. Este valor es solo referencial, ya que la data de la tabla **deudas** es volátil.
+Proceso que integra la solución con la plataforma YAPAGO, permitiendo a las empresas realizar la recaudación de sus deudas a través de los canales bancarios.
 
-- La solución está compuesta por **3 funciones**, las cuales se despliegan de manera conjunta al publicar el componente en **Azure**. Esto se debe a que, por la propia naturaleza de un servicio **Azure Function**, no es posible realizar una publicación parcial.  
+## 4.2. Caracteristicas
 
-- El parámetro **`idDeuda`**, presente en cada objeto del array **`deudas`** dentro del *response* del método de consulta, debe enviarse nuevamente en cada *request* a través del parámetro **`referenciaDeuda`** correspondiente a cada pago asociado. Este valor tiene únicamente carácter referencial, ya que la información de la tabla **deudas** es volátil y no persistente. 
+- Componente de tipo Azure Function **`Http trigger`**.
+- La interfaz a exponer corresponde a Azure Function publicada como API REST bajo protocolo HTTPS.
+- Todos los endpoints a implementarse son de tipo POST.
+- El control del tiempo de ejecución para las operaciones de reversa está configurado en el CORE de la plataforma YAPAGO.
+- El control de orden cronológico para los pagos está configurado en el CORE de la plataforma YAPAGO.
 
----
 
-**`Response Consulta`**
+## 4.3. Metodos a implementarse
 
-```json
-{
-  "cliente": "Juan Perez",
-  "deudas": [
-    {
-      "idDeuda": "12",
-      "servicio": "001",
-      "documento": "F00000001",
-      "descripcionDoc": "Factura",
-      "fechaVencimiento": "10052025",
-      "fechaEmision": "10052025",
-      "deuda": "100.99",
-      "pagoMinimo": "100.99",
-      "moneda": "1"
-    }
-  ],
-  "codResp": "00",
-  "desResp": "Ok"
-}
-```
+### 4.3.1. Descripción
 
----
+Los métodos a implementarse son funciones dentro de la solución que representan operaciones definidas sobre la base de datos y que pueden ser expuestas como endpoints para su integración externa.
 
-**`Request del pago`**
+### 4.3.2. Listado de métodos
 
-```json
-{ 
-  "fechaTxn": "20092025", 
-  "horaTxn": "180520", 
-  "idCanal": "10", 
-  "idForma": "01", 
-  "numeroOperacion": "A0154785", 
-  "idConsulta": "12345678", 
-  "servicio": "001", 
-  "numeroDocumento": "F00000001", 
-  "importePagado": 100.99, 
-  "moneda": "1", 
-  "idEmpresa": "801", 
-  "idBanco": "1020", 
-  "voucher": "", 
-  "referenciaDeuda": 12 
-}
-```
+- **`Autenticar`:** Método que permite obtener un token de tipo Bearer JWT que sera utilizado para interatuar con los demás metodos. Se aplicarán políticas de autorización para controlar el acceso a los recursos en
+función de roles y permisos definidos.
+- **`Consulta`:** Metodo de busqueda que permite obtener un cliente y todos los documentos de deuda con un saldo pendiente. Los principales criterios para realizar esta búsqueda son:
+	- **Código de empresa:** Código de identificación asignado a la empresa por ASBANC y que se encuentra registrado dentro de la plataforma YAPAGO.
+	- **Código de servicio:** Código de servicio asociado a una empresa por un producto o servicio.
+	- **Identificador:** Identificador con el cual se realiza la búsqueda.
+- **`Pago`:** Método que permite aplicar un importe parcial o total sobre el saldo de una deuda registrada dentro de la solución.
+- **`Reversa`:** Método que permite desaplicar un importe parcial o total sobre el saldo de una deuda registrada dentro de la solución.
 
-- El método de consulta debe invocarse **una única vez**, no es necesario hacer el artificio de consulta escalonada por parte del proveedor.  
+## 4.4. Notificaciones
 
-- El parámetro del request **`idConsulta`** dentro de la consulta no debe considerar los **0 a la izquierda**. Por ejemplo:  
--Valor original ⇒ `98547859` | Valor enviado ⇒ `98547859`  
--Valor original ⇒ `04785124` | Valor enviado ⇒ `4785124`  
+### 4.4.1. Descripción
 
-- El parámetro del request **`tipoConsulta`** dentro de la consulta siempre será **0**.
+Una notificación es un proceso compuesto que orquesta la ejecución de uno o más métodos de la solución en una secuencia definida, con el objetivo de atender un evento específico. Copnsiderar que la sumatoria de los tiempos es lo validado por los bancos como tiempo de respuesta.
+
+### 4.4.2. Tipos
+
+- **`Notificación de consulta`:** Flujo simple en el que se ejecuta únicamente el método Consulta, utilizado para validar la existencia del cliente y verificar las deudas asociadas.
+- **`Notificación de pago`:** Flujo compuesto en el que se ejecuta de forma secuencial el metodo de consulta y el de pago, siempre y cuando se haya validado que el cliente existe y que este tiene deudas. Se debe considerar hasta un máximo de 4 pagos.
+<br>Este flujo se representa de la siguiente manera: consulta => pago01 => pago02 => pago03 => pago04
+- **`Notificación de reversa`:** Flujo compuesto en el que se ejecuta de forma secuencial el metodo de consulta y el de reversa, hasta un máximo de 4 operaciones.
+<br>Este flujo se representa de la siguiente manera: consulta => reversa01 => reversa02 => reversa03 => reversa04
 
 ---
 
@@ -97,6 +78,7 @@ El proceso de lectura permite que cada empresa cargue sus deudas en la base de d
 
 ## 5.2. Características
 
+- Componente de tipo Azure Function **`Timer trigger`**.
 - Este proceso se ejecuta automáticamente con una frecuencia configurable mediante una variable de entorno en Azure, la cual aplica de forma uniforme a todas las empresas.
 - El único formato de archivo soportado es .TXT.
 - Se ha mantenido la estructura original del encabezado y del detalle de deudas para asegurar compatibilidad con los archivos generados por clientes de EXPRESS en caso de migración.
@@ -110,12 +92,12 @@ El siguiente diagrama muestra el ciclo de vida del proceso de carga de deudas de
 
 ## 5.4. Estructura de carpetas
 
-| **Componente**       | **Descripción**                                                                 | **Path**                                   |
+| **Componente**        | **Descripción**                                                                 | **Path**                                   |
 |-----------------------|---------------------------------------------------------------------------------|--------------------------------------------|
-| **Empresa**           | Raíz de la carpeta asignada a la empresa por ASBANC.                           | `[root]/[código empresa]`                  |
-| **Deudas**            | Carpeta raíz destinada al proceso de carga.                                    | `[root]/[código empresa]/Deudas`           |
-| **Deudas - Pending**  | Carpeta en la que se deposita el archivo para su lectura.                      | `[root]/[código empresa]/Deudas/Pending`   |
-| **Deudas - Complete** | Carpeta a la que se mueve el archivo después de procesarse.                    | `[root]/[código empresa]/Deudas/Complete`  |
+| **Empresa**           | Raíz de la carpeta asignada a la empresa por ASBANC.                            | `[root]/[código empresa]`                  |
+| **Deudas**            | Carpeta raíz destinada al proceso de carga.                                     | `[root]/[código empresa]/Deudas`           |
+| **Deudas - Pending**  | Carpeta en la que se deposita el archivo para su lectura.                       | `[root]/[código empresa]/Deudas/Pending`   |
+| **Deudas - Complete** | Carpeta a la que se mueve el archivo después de procesarse.                     | `[root]/[código empresa]/Deudas/Complete`  |
 
 ## 5.5. Estructura del archivo
 
@@ -190,6 +172,7 @@ El detalle de cada deuda se estructura de la siguiente manera:
 	<br>Por ejemplo: **resume_D0050010092025003_17092025052048308.json**
 	<br>Si no se procesan registros => **ERROR_[nombre archivo]_[ddMMyyyyhhmmssfff].json**
 	<br>Por ejemplo: **ERROR_D0050010092025003_17092025052048308.json**
+- Un archivo de validación parcial, implica que la empresa crea un único documento por cliente con un importe de 999999 y un importe mínimo de 1, y cuyo número de documento puede ser siempre el mismo, por ejemplo **ANTICIPO** con fecha de vencimiento igual a la fecha de generación.
 
 **`EJEMPLO 01 - Se procesaron registros`**
 ```json
@@ -257,6 +240,7 @@ Proceso en el que la solución genera el detalle de las transacciones y lo pone 
 
 ## 6.2. Características
 
+- Componente de tipo Azure Function **`Timer trigger`**.
 - Este proceso se realiza de forma automática con una frecuencia configurable "X" dentro de las variables de entorno en AZURE. La variable que controla el tiempo de ejecución es la misma para todas las empresas.
 - El formato soportado para los archivos es ".TXT".
 
@@ -273,17 +257,7 @@ El siguiente diagrama muestra el ciclo de vida del proceso de generación del de
 | **Empresa**           | Raíz de la carpeta asignada a la empresa por ASBANC.                            | `[root]/[código empresa]`                  |
 | **Pagos**             | Carpeta destinada al proceso de generación. En esta carpeta se depositan los archivos para que la empresa pueda procesarlos. | `[root]/[código empresa]/Pagos` |
 
-## 6.5. Reglas del proceso
-
-- Como resultado de realizar el proceso de generación, se genera 2 archivos:
-	- **Archivo transaccional:** Archivo con extensión ".TXT" que contiene el detalle de las transacciones, cuyo nombre tiene la siguiente estructura:
-	<br>**[Código de empresa]_[ddMMyyyyhhmmssfff].TXT**
-	<br>Por ejemplo: **801_17092025052048308.TXT**
-	- **Resumen transaccional:** Archivo con extensión ".json" que contiene el resumen del proceso de generación, cuyo nombre tiene la siguiente estructura:
-	<br>**[Código de empresa]_[ddMMyyyyhhmmssfff].json**
-	<br>Por ejemplo: **801_17092025052048308.json**
-
-## 6.6. Estructura del archivo
+## 6.5. Estructura del archivo
 
 La estructura del archivo de pagos es la siguiente:
 
@@ -309,3 +283,14 @@ La estructura del archivo de pagos es la siguiente:
 | 18  | Cuenta banco                 | N    | 20       | 182      | 182      | Número de cuenta asociada al servicio desde el cual se realizo la transacción |
 | 19  | Voucher                      | N    | 20       | 182      | 182      | Numero de voucher enviado desde el canal del banco. Actualmente solo en uso por BBVA y en algunos canales. |
 | 20  | Filler (libre)               | N    | 30       | 183      | 212      | Campo reservado para uso futuro. |
+
+## 6.6. Reglas del proceso
+
+- Como resultado de realizar el proceso de generación, se genera 2 archivos:
+	- **Archivo transaccional:** Archivo con extensión ".TXT" que contiene el detalle de las transacciones, cuyo nombre tiene la siguiente estructura:
+	<br>**[Código de empresa]_[ddMMyyyyhhmmssfff].TXT**
+	<br>Por ejemplo: **801_17092025052048308.TXT**
+	- **Resumen transaccional:** Archivo con extensión ".json" que contiene el resumen del proceso de generación, cuyo nombre tiene la siguiente estructura:
+	<br>**[Código de empresa]_[ddMMyyyyhhmmssfff].json**
+	<br>Por ejemplo: **801_17092025052048308.json**
+
