@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "YP.app.Generator": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7060",
+      "launchBrowser": false
+    }
+  }
+}

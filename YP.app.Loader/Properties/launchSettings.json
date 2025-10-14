@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "YP.app.Loader": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7170",
+      "launchBrowser": false
+    }
+  }
+}

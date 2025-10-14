@@ -50,7 +50,9 @@ namespace YP.ZReg.Services.Implementations
                     }
                     else
                     {
-                        int tokenTime = minutes * hours * days;
+                        var expiration = DateTime.UtcNow.AddDays(days)
+                                        .AddHours(hours)
+                                        .AddMinutes(minutes);
                         //response.StartExec = DateTime.Now;
 
                         var symetricKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(dps.jwc.SecretKey));
@@ -64,7 +66,7 @@ namespace YP.ZReg.Services.Implementations
                             issuer: dps.cnf.JwtAlterConfig.Issuer,
                             audience: dps.cnf.JwtAlterConfig.Audience,
                             claims: claims,
-                            expires: DateTime.UtcNow.AddMinutes(tokenTime),
+                            expires: expiration,//DateTime.UtcNow.AddMinutes(tokenTime),
                             signingCredentials: credentials
                         );
 
