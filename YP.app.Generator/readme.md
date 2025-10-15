@@ -1,4 +1,4 @@
-# TimerTrigger - C<span>#</span>
+﻿# TimerTrigger - C<span>#</span>
 
 The `TimerTrigger` makes it incredibly easy to have your functions executed on a schedule. This sample demonstrates a simple use case of calling your function every 5 minutes.
 
@@ -9,3 +9,34 @@ For a `TimerTrigger` to work, you provide a schedule in the form of a [cron expr
 ## Learn more
 
 <TODO> Documentation
+
+
+```plaintext
+YP.Reg.Loader/
+├── YP.app.Generator/
+│   ├── FunctionGenerator.cs
+│   ├── Program.cs
+│   ├── StartUp.cs
+│   ├── host.json
+│   ├── local.settings.json
+│   ├── readme.md
+│   └── Properties/
+│
+├── YP.app.Loader/
+│   ├── FunctionLoader.cs
+│   ├── Program.cs
+│   ├── StartUp.cs
+│   ├── host.json
+│   ├── local.settings.json
+│   ├── readme.md
+│   └── Properties/
+│
+├── YP.app.Transac/
+│   ├── FunctionTransac.cs
+│   ├── Program.cs
+│   ├── StartUp.cs
+│   ├── host.json
+│   ├── local.settings.json
+│   ├── readme.md
+│   └── Properties/
+```

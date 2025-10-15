@@ -13,12 +13,26 @@ Solución que permite a las empresas cargar información sobre deudas pendientes
 
 # 3. Componentes de la solución
 
+## 3.1. Descripción de componentes
+
 - **Servicio de carga:** Función encargada de leer archivos desde una carpeta en SFTP y, una vez procesados, dejarlos en otra carpeta dentro del mismo repositorio. El intervalo de ejecución es parametrizable en minutos.  
 - **API transaccional:** Interfaz que permite la integración de la solución con la plataforma **YAPAGO**.  
 - **Servicio generador:** Función responsable de generar los archivos de pagos correspondientes a un rango de tiempo determinado. El intervalo de ejecución también es parametrizable en minutos.  
 - **Tabla de logs:** Componente **Table** de **Azure Storage** donde se registran los logs de las peticiones realizadas al API transaccional, así como los resultados de los servicios de carga de deudas y de generación de pagos.  
 - **SFTP:** Componente utilizado como punto de intercambio. Un tercero deposita en él los archivos que son procesados por el servicio de carga, y desde este mismo repositorio puede recuperar los archivos de pagos generados por el servicio generador.
 - **Base de datos:** Componente SQL Azure DB en el que se centralizará la información cargada por las empresas.  
+
+## 3.2. Estructura de la solución
+
+El proyecto se estructura de la siguiente manera:
+
+```plaintext
+YP.Reg.Loader/
+├── YP.app.Generator/      # Proyecto para la generación de archivos dentro del repositorio SFTP
+├── YP.app.Loader/         # Proyecto para la lectura del repositorio SFTP y escritura en la base de datos
+├── YP.app.Transac/        # Proyecto que permite integrar la plataforma YAPAGO con la base de datos multicliente
+└── YP.Reg.Loader.sln      # Proyecto original que contiene todas las funcionalidades previamente descritas.
+```
 
 ---
 
