@@ -17,9 +17,9 @@
 - **`BlobConfig__Table`:** Parámetro que permite establecer el nombre de la tabla dentro del Azure Table Storage donde se registrarán los logs de los diferentes procesos ejecutados por los componentes.
 - **`BlobConfig__EnableLog`:** Parámetro que permite establecer si el log se encuentra activo o no. Los valores admitidos son: **[On|Off]**
 
-## 1.2. Archivo para desarrollo local
+## 1.2. Ejemplo de archivos para desarrollo local
 
-Dependiendo de la aplicación, se tienen los siguientes archivos "local.settings.json":
+Dependiendo del componente, se tienen los siguientes archivos "local.settings.json":
 
 ### 1.2.1. Proceso de carga
 
