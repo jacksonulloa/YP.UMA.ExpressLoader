@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+jIM0Ev2eGA=",
+  "dgSpecHash": "p1VS8ZoRrak=",
   "success": true,
-  "projectFilePath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Repositories\\YP.ZReg.Repositories.csproj",
+  "projectFilePath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.LoaderV2\\YP.UMA.ExpressLoader\\YP.ZReg.Repositories\\YP.ZReg.Repositories.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\julloa\\.nuget\\packages\\automapper\\15.0.1\\automapper.15.0.1.nupkg.sha512",
     "C:\\Users\\julloa\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",

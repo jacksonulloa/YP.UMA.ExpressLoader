@@ -24,4 +24,10 @@
     <ProjectReference Include="..\YP.ZReg.Services\YP.ZReg.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="configurations.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

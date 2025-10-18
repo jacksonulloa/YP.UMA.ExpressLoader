@@ -37,6 +37,7 @@ namespace YP.app.Transac
         public static void ConfigBusinessServices(IServiceCollection ListServices)
         {
             ListServices.AddTransient<ITransacService, TransacService>();
+            ListServices.AddTransient<IAzureSftp, AzureSftp>();
             ListServices.AddSingleton<IEmpresaCache, EmpresaCache>();
             ListServices.AddSingleton<IApiSecurityService, ApiSecurityService>();
             ListServices.AddSingleton<IApiTransacService, ApiTransacService>();

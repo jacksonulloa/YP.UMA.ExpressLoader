@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3t8xoO6wbEQ=",
+  "dgSpecHash": "K5YMv0+G110=",
   "success": true,
-  "projectFilePath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj",
+  "projectFilePath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.LoaderV2\\YP.UMA.ExpressLoader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\julloa\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\julloa\\.nuget\\packages\\azure.data.tables\\12.11.0\\azure.data.tables.12.11.0.nupkg.sha512",

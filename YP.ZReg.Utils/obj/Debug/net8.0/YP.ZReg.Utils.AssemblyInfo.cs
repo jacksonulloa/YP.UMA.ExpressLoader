@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YP.ZReg.Utils")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbb9511474d3efe07dd6c7a82950575a558aedf0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c8a5e23109c14c37a74947777802a1a86eef273")]
 [assembly: System.Reflection.AssemblyProductAttribute("YP.ZReg.Utils")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YP.ZReg.Utils")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

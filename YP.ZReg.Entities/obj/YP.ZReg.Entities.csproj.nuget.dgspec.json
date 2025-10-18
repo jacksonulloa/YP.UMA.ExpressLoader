@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj": {}
+    "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.LoaderV2\\YP.UMA.ExpressLoader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj": {}
   },
   "projects": {
-    "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj": {
+    "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.LoaderV2\\YP.UMA.ExpressLoader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj",
+        "projectUniqueName": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.LoaderV2\\YP.UMA.ExpressLoader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj",
         "projectName": "YP.ZReg.Entities",
-        "projectPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj",
+        "projectPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.LoaderV2\\YP.UMA.ExpressLoader\\YP.ZReg.Entities\\YP.ZReg.Entities.csproj",
         "packagesPath": "C:\\Users\\julloa\\.nuget\\packages\\",
-        "outputPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.Loader\\YP.ZReg.Entities\\obj\\",
+        "outputPath": "D:\\PROYECTOS\\YaPagoExpress\\ProcesoDbSql\\YP.Reg.LoaderV2\\YP.UMA.ExpressLoader\\YP.ZReg.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
