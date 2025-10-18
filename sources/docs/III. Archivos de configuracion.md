@@ -1,5 +1,7 @@
 # 1. Variables de entorno
 
+## 1.1. Listado de variables
+
 - **`LoaderCron`:** Parámetro que permite establecer la frecuencia con la cual se ejecuta el timer de la función de carga de deudas. 
 - **`GeneratorCron`:** Parámetro que permite establecer la frecuencia con la cual se ejecuta el timer de la función de generación de pagos.
 - **`DbConf__ConnectionString`:** Parámetro que  permite establecer la cadena de conexión hacia la base de datos multicliente.
@@ -15,13 +17,83 @@
 - **`BlobConfig__Table`:** Parámetro que permite establecer el nombre de la tabla dentro del Azure Table Storage donde se registrarán los logs de los diferentes procesos ejecutados por los componentes.
 - **`BlobConfig__EnableLog`:** Parámetro que permite establecer si el log se encuentra activo o no. Los valores admitidos son: **[On|Off]**
 
+## 1.2. Archivo para desarrollo local
+
+Dependiendo de la aplicación, se tienen los siguientes archivos "local.settings.json":
+
+### 1.2.1. Proceso de carga
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "LoaderCron": "0 */2 * * * *",
+    "DbConf__ConnectionString": "Server=10.20.14.55;Database=ASB_YAPAGOMULTICLIENT_DEV_QA;User Id=julloa;Password=julloa123;TrustServerCertificate=True;",
+    "SftpConfig__Server": "cerberus03sftp.asbsis.com",
+    "SftpConfig__User": "usharederprod-zigleet",
+    "SftpConfig__Pass": "2U%jtN=@WasS12",
+    "SftpConfig__Root": "/SFTP-NETSUITE-PROD/ReplicaAzure",
+    "BlobConfig__ConnectionString": "xxxxxxxxxxxxxxxxxxxx",
+    "BlobConfig__Table": "YaPagoMulticientLog",
+    "BlobConfig__EnableLog": "On"
+  }
+}
+```
+
+### 1.2.2. Proceso de generación
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "GeneratorCron": "0 */2 * * * *",
+    "DbConf__ConnectionString": "Server=10.20.14.55;Database=ASB_YAPAGOMULTICLIENT_DEV_QA;User Id=julloa;Password=julloa123;TrustServerCertificate=True;",
+    "SftpConfig__Server": "cerberus03sftp.asbsis.com",
+    "SftpConfig__User": "usharederprod-zigleet",
+    "SftpConfig__Pass": "2U%jtN=@WasS12",
+    "SftpConfig__Root": "/SFTP-NETSUITE-PROD/ReplicaAzure",
+    "BlobConfig__ConnectionString": "xxxxxxxxxxxxxxxxxxxx",
+    "BlobConfig__Table": "YaPagoMulticientLog",
+    "BlobConfig__EnableLog": "On"
+  }
+}
+```
+
+### 1.2.3. Procesamiento transaccional
+
+```json
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "DbConf__ConnectionString": "Server=10.20.14.55;Database=ASB_YAPAGOMULTICLIENT_DEV_QA;User Id=julloa;Password=julloa123;TrustServerCertificate=True;",
+    "JwtConfig__Claim": "adminprofile",
+    "JwtConfig__User": "U5u4r10.3x73rn0",
+    "JwtConfig__Password": "*C0n7r4s3n4.P4ra.3xt3rn0S",
+    "JwtConfig__SecretKey": "NHNiNG5jLUNsMTNudC1TM3J2M3ItQjRzMy02NC0xbmczbjEzcjE0LVNX",
+    "BlobConfig__ConnectionString": "xxxxxxxxxxxxxxxxxxxx",
+    "BlobConfig__Table": "YaPagoMulticientLog",
+    "BlobConfig__EnableLog": "On"
+  }
+}
+```
+
 ---
 
 # 2. Archivos de configuración
 
 ## 2.1. configurations.json
 
-### 2.1.1. Parámetros
+### 2.1.1. Descripción
+
+Archivo que contiene configuraciones necesarias para interactuar con la plataforma durante la ejecución.
+
+### 2.1.2. Parámetros
 
 - **`Configurations`:** Parámetro raíz donde se tienen las configuraciones del sistema.
     - **`EmpresasConfig`:** Parámetro de tipo array object que contiene las configuraciones necesarias para una empresa. 
@@ -35,7 +107,7 @@
         - **`HoursFactor`:** Parámetro que permite establecer el factor horas para la formula del calculo de minutos para que caduque un JWT generado.
         - **`DaysFactor`:** Parámetro que permite establecer el factor días para la formula del calculo de minutos para que caduque un JWT generado.
 
-### 2.1.2. Ejemplo de configuración
+### 2.1.3. Ejemplo de configuración
 
 ```json
 {

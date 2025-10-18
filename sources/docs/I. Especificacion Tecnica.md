@@ -31,7 +31,7 @@ YP.Reg.Loader/
 ├── YP.app.Generator/      # Proyecto para la generación de archivos dentro del repositorio SFTP
 ├── YP.app.Loader/         # Proyecto para la lectura del repositorio SFTP y escritura en la base de datos
 ├── YP.app.Transac/        # Proyecto que permite integrar la plataforma YAPAGO con la base de datos multicliente
-└── YP.Reg.Loader.sln      # Proyecto original que contiene todas las funcionalidades previamente descritas.
+└── YP.Loader.app          # Proyecto original que contiene todas las funcionalidades previamente descritas.
 ```
 
 ---
