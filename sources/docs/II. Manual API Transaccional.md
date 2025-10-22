@@ -12,16 +12,17 @@ La estructura de los endpoints tendra el siguiente formato: **[Url base]/[Versi�
 
 # 3. Detalle de entorno
 
-| **Ambiente**          | **Base Url**                                                                    |
-|-----------------------|---------------------------------------------------------------------------------|
-| **QA**                | http://localhost:7265/api/swagger/ui#/                                          |
-| **PRD**               |                                                                                 |
+| **Ambiente**          | **Url**                                                                                    |
+|-----------------------|--------------------------------------------------------------------------------------------|
+| **QA - Base**         | https://af-ypmultiapi-qa-eus2-fug6e8f6f2aecjgc.eastus2-01.azurewebsites.net/api            |
+| **QA - Swagger**      | https://af-ypmultiapi-qa-eus2-fug6e8f6f2aecjgc.eastus2-01.azurewebsites.net/api/swagger/ui |
+| **PRD**               |                                                                                            |
 
 ---
 
 # 4. Definición de los endpoints
 
-La interface se compone de 3 métodos:
+La interface se compone de 4 métodos:
 
 ## 4.1. Autenticar
 

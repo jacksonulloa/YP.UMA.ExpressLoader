@@ -83,6 +83,11 @@ namespace YP.ZReg.Services.Implementations
                 string json = JsonSerializer.Serialize(resumeProcess, new JsonSerializerOptions { WriteIndented = true });
                 string archivoFinal = $"{paths.DeudasComplete}/{fileNewName}";
                 await ass.UploadJsonAsync($"{paths.DeudasComplete}/resume_{fileNewName}.json", json, Encoding.UTF8, default);
+
+                TaskExtension.ProcesarResultadoAsync<object, ResumeCompactLoadProcess>(dps,
+                    null, resumeProcess, "Carga", resumeProcess.StartExec, empresa.Codigo, "Info",
+                    "22", "Ok", HttpStatusCode.Accepted).FireAndForget();
+
                 return;
             }
             var archivos = await ass.ListAsync(paths.DeudasPending);

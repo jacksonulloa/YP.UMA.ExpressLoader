@@ -9,7 +9,14 @@ namespace YP.app.Loader
         [Function("FunctionLoadFile")]
         public async Task RunLoader([TimerTrigger("%LoaderCron%", RunOnStartup = true)] TimerInfo myTimer)
         {
-            await los.ReadFilesAsync();
+            try
+            {
+                await los.ReadFilesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message.ToString());
+            }
         }
     }
 }
